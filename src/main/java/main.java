@@ -1,4 +1,5 @@
 import org.sqlite.SQLiteConfig;
+import java.util.Scanner;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +9,14 @@ public class main {
     public static Connection db = null;
     public static void main(String[] args) {
 
+        Scanner input = new Scanner(System.in);
+
         openDatabase("Words.db");
+        int score = input.nextInt();
+        int position = input.nextInt();
+        String userName = input.next();
+        leaderboardController.updateLB(score,position,userName);
+        leaderboardController.readLB();
         closeDatabase();
     }
     private static void openDatabase(String dbFile)
@@ -41,7 +49,6 @@ public class main {
             System.out.println("Database disconnection error: " + exception.getMessage());
         }
     }
-
 
 
 }
