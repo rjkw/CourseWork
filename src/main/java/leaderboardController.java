@@ -57,5 +57,19 @@ public class leaderboardController {
             System.out.println("Database error: " + exception.getMessage());
         }
     }
+    public static void deleteLB(int Placement) { // This lets me delete the placement of a player in my leaderboard table.
+
+        try {
+
+            PreparedStatement ps = main.db.prepareStatement("DELETE FROM leaderBoard WHERE Placement = ?");
+
+            ps.setInt(1, Placement);
+
+            ps.execute();
+
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+        }
+    }
 
 }
