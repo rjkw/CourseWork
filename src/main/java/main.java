@@ -12,11 +12,7 @@ public class main {
         Scanner input = new Scanner(System.in);
 
         openDatabase("Words.db");
-        int score = input.nextInt();
-        int position = input.nextInt();
-        String userName = input.next();
-        leaderboardController.updateLB(score,position,userName);
-        leaderboardController.readLB();
+        WordsController.ReadWords();
         closeDatabase();
     }
     private static void openDatabase(String dbFile)
