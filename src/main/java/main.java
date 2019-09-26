@@ -12,7 +12,6 @@ public class main {
         Scanner input = new Scanner(System.in);
 
         openDatabase("Words.db");
-        WordsController.ReadWords();
         closeDatabase();
     }
     private static void openDatabase(String dbFile)
