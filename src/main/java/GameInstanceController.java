@@ -22,7 +22,7 @@ public class GameInstanceController {
             System.out.println("Database error: " + exception.getMessage());
         }
     }
-    public static void insertGI (int WordID, int Score, int UserID) { // This allows me to  words into the database.
+    public static void insertGI (int WordID, int Score, int UserID) { // This allows me to insert words into the database.
 
         try {
 
@@ -39,7 +39,7 @@ public class GameInstanceController {
             System.out.println("Database error: " + exception.getMessage());
         }
     }
-    public static void updateGI(int WordId, int Score, int UserID) { // This allows me to  words from the database.
+    public static void updateGI(int WordId, int Score, int UserID) { // This allows me to update words from the database.
 
         try {
 
@@ -56,7 +56,7 @@ public class GameInstanceController {
             System.out.println("Database error: " + exception.getMessage());
         }
     }
-    public static void deleteGI(int WordId) { // This allows me to delete  from the database.
+    public static void deleteGI(int WordId) { // This allows me to delete from the database.
 
         try {
 
