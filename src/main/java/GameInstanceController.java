@@ -6,7 +6,7 @@ public class GameInstanceController {
 
         try {
 
-            PreparedStatement ps = main.db.prepareStatement("SELECT WordID,Score,UserID FROM Words"); // This allows me to read the database.
+            PreparedStatement ps = main.db.prepareStatement("SELECT WordID,Score,UserID FROM GameInstance"); // This allows me to read the database.
 
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -27,7 +27,7 @@ public class GameInstanceController {
         try {
 
             PreparedStatement ps = main.db.prepareStatement(
-                    "INSERT INTO Words (WordID, Score, UserID) VALUES (?, ?, ?)");
+                    "INSERT INTO GameInstance (WordID, Score, UserID) VALUES (?, ?, ?)");
 
             ps.setInt(1, WordID);
             ps.setInt(2, Score);
@@ -44,7 +44,7 @@ public class GameInstanceController {
         try {
 
             PreparedStatement ps = main.db.prepareStatement(
-                    "UPDATE Words SET WordId = ?, Score  = ? WHERE UserID = ?");
+                    "UPDATE GameInstance SET WordId = ?, Score  = ? WHERE UserID = ?");
 
             ps.setInt(1, WordId);
             ps.setInt(2, Score);
@@ -60,7 +60,7 @@ public class GameInstanceController {
 
         try {
 
-            PreparedStatement ps = main.db.prepareStatement("DELETE FROM Words WHERE WordID = ?");
+            PreparedStatement ps = main.db.prepareStatement("DELETE FROM GameInstance WHERE WordID = ?");
 
             ps.setInt(1, WordId);
 

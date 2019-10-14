@@ -6,7 +6,7 @@ public class UserTableController {
 
         try {
 
-            PreparedStatement ps = main.db.prepareStatement("SELECT UserID,FirstName,LastName,UserName,Email,Password FROM Words"); // This allows me to read the database.
+            PreparedStatement ps = main.db.prepareStatement("SELECT UserID,FirstName,LastName,UserName,Email,Password FROM UserTable"); // This allows me to read the database.
 
             ResultSet results = ps.executeQuery();
             while (results.next()) {
@@ -33,7 +33,7 @@ public class UserTableController {
         try {
 
             PreparedStatement ps = main.db.prepareStatement(
-                    "INSERT INTO Words (UserID,FirstName,LastName,UserName,Email,Password) VALUES (?, ?, ?,?,?,?)");
+                    "INSERT INTO UserTable (UserID,FirstName,LastName,UserName,Email,Password) VALUES (?, ?, ?,?,?,?)");
 
             ps.setInt(1, UserId);
             ps.setString(2, FirstName);
@@ -53,7 +53,7 @@ public class UserTableController {
 
         try {
 
-            PreparedStatement ps = main.db.prepareStatement("UPDATE Words SET FirstName = ?, LastName  = ?,UserName = ?, Email = ?, Password = ? WHERE UserID = ?");
+            PreparedStatement ps = main.db.prepareStatement("UPDATE UserTable SET FirstName = ?, LastName  = ?,UserName = ?, Email = ?, Password = ? WHERE UserID = ?");
 
             ps.setString(2, FirstName);
             ps.setString(3, LastName);
@@ -71,7 +71,7 @@ public class UserTableController {
 
         try {
 
-            PreparedStatement ps = main.db.prepareStatement("DELETE FROM Words WHERE UserId = ?");
+            PreparedStatement ps = main.db.prepareStatement("DELETE FROM UserTable WHERE UserId = ?");
 
             ps.setInt(1, UserId);
 
