@@ -12,6 +12,7 @@ public class main {
         Scanner input = new Scanner(System.in);
 
         openDatabase("Words.db");
+        GameInstanceController.ReadGI();
         closeDatabase();
     }
     private static void openDatabase(String dbFile)

@@ -14,8 +14,8 @@ public class GameInstanceController {
                 int Score = results.getInt(2);
                 int UserID = results.getInt(3);
                 System.out.print("WordID: " + WordID + ",  ");
-                System.out.print("Definition: " + Score + ",  ");
-                System.out.print("Difficulty: " + UserID + "\n");
+                System.out.print("Score: " + Score + ",  ");
+                System.out.print("UserID: " + UserID + "\n");
             }
 
         } catch (Exception exception) {

@@ -16,12 +16,12 @@ public class UserTableController {
                 String Username = results.getString(4);
                 String Email = results.getString(5);
                 String Password = results.getString(6);
-                System.out.print("UserID: " + UserID + ",  ");
-                System.out.print("FirstName: " + FirstName + ",  ");
-                System.out.print("LastName : " + LastName + " ");
-                System.out.print("UserName :"  + Username + " ");
-                System.out.print("Email :" + Email + " ");
-                System.out.print("Password :" + Password + " ");
+                System.out.println("UserID: " + UserID + ",  ");
+                System.out.println("FirstName: " + FirstName + ",  ");
+                System.out.println("LastName : " + LastName + " ");
+                System.out.println("UserName :"  + Username + " ");
+                System.out.println("Email :" + Email + " ");
+                System.out.println("Password :" + Password + " ");
             }
 
         } catch (Exception exception) {

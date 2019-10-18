@@ -6,16 +6,16 @@ public class leaderboardController {
 
         try {
 
-            PreparedStatement ps = main.db.prepareStatement("SELECT Score,Placement,userName FROM leaderBoard");
+            PreparedStatement ps = main.db.prepareStatement("SELECT Score,Placement,userID FROM leaderBoard");
 
             ResultSet results = ps.executeQuery();
             while (results.next()) {
                 int Score = results.getInt(1);
                 int Placement = results.getInt(2);
-                String userName = results.getString(3);
+                String userID = results.getString(3);
                 System.out.print("Score: " + Score + ",  ");
                 System.out.print("Position: " + Placement + ",  ");
-                System.out.print("UserName: " + userName + "\n");
+                System.out.print("UserID: " + userID + "\n");
             }
 
         } catch (Exception exception) {
