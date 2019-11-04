@@ -1,79 +1,115 @@
 package Controllers;
 
 import Server.main;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.eclipse.jetty.server.Authentication;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+@Path("leaderboard")
 public class leaderboardController {
-    public static void readLB() { // This is my read operator it allows me to read the database.
-
+    @GET
+    @Path("list")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String ReadLB() {
+        System.out.println("list the leaderboard");
+        JSONArray list = new JSONArray();
         try {
-
-            PreparedStatement ps = main.db.prepareStatement("SELECT Score,Placement,userID FROM leaderBoard");
-
+            PreparedStatement ps = main.db.prepareStatement("SELECT Score, Placement, UserID FROM Leaderboard");
             ResultSet results = ps.executeQuery();
             while (results.next()) {
-                int Score = results.getInt(1);
-                int Placement = results.getInt(2);
-                String userID = results.getString(3);
-                System.out.print("Score: " + Score + ",  ");
-                System.out.print("Position: " + Placement + ",  ");
-                System.out.print("UserID: " + userID + "\n");
+                JSONObject item = new JSONObject();
+                item.put("Score", results.getInt(1));
+                item.put("Placement", results.getInt(2));
+                item.put("UserID", results.getInt(3));
+                list.add(item);
             }
-
+            return list.toString();
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
         }
     }
 
-    public static void createLB(int Score,int Placement,String userName) { // This is my create operator it allows me to create new records in my database.
 
+    @POST
+    @Path("new")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String insertThing(
+            @FormDataParam("Score") Integer Score, @FormDataParam("Placement") Integer Placement, @FormDataParam("UserID") Integer UserID) {
         try {
+            if (Score == null || Placement == null || UserID == null) {
+                throw new Exception("One or more form data parameters are missing in the HTTP request.");
+            }
+            System.out.println("New ranking made placement=" + Placement);
 
-            PreparedStatement ps = main.db.prepareStatement(
-                    "INSERT INTO leaderBoard (Score, Placement, userName) VALUES (?, ?, ?)");
-
+            PreparedStatement ps = main.db.prepareStatement("INSERT INTO Things (Id, Name, Quantity) VALUES (?, ?, ?)");
             ps.setInt(1, Score);
             ps.setInt(2, Placement);
-            ps.setString(3, userName);
-
+            ps.setInt(3, UserID);
             ps.execute();
+            return "{\"status\": \"OK\"}";
 
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to create new item, please see server console for more info.\"}";
         }
     }
-    public static void updateLB(int Score, int Placement, String userName) { // This lets me update records in the database.
 
+    @POST
+    @Path("update")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String updateThing(
+            @FormDataParam("Score") Integer Score, @FormDataParam("Placement") Integer Placement, @FormDataParam("UserID") Integer UserID) {
         try {
+            if (Score == null || Placement == null || UserID == null) {
+                throw new Exception("One or more form data parameters are missing in the HTTP request.");
+            }
+            System.out.println("Ranking Updated placement = " + Placement);
 
-            PreparedStatement ps = main.db.prepareStatement(
-                    "UPDATE leaderBoard SET Score = ?, Placement = ? WHERE userName = ?");
-
-            ps.setInt(1,Score);
+            PreparedStatement ps = main.db.prepareStatement("INSERT INTO Things (Id, Name, Quantity) VALUES (?, ?, ?)");
+            ps.setInt(1, Score);
             ps.setInt(2, Placement);
-            ps.setString(3, userName);
-
+            ps.setInt(3, UserID);
             ps.execute();
+            return "{\"status\": \"OK\"}";
 
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to update item, please see server console for more info.\"}";
         }
     }
-    public static void deleteLB(int Placement) { // This lets me delete the placement of a player in my leaderboard table.
+    @POST
+    @Path("delete")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteThing(@FormDataParam("Placement") Integer Placement) {
 
         try {
+            if (Placement == null) {
+                throw new Exception("One or more form data parameters are missing in the HTTP request.");
+            }
+            System.out.println("Ranking deleted placement = " + Placement);
 
-            PreparedStatement ps = main.db.prepareStatement("DELETE FROM leaderBoard WHERE Placement = ?");
+            PreparedStatement ps = main.db.prepareStatement("DELETE FROM Words WHERE Placement = ?");
 
             ps.setInt(1, Placement);
 
             ps.execute();
 
+            return "{\"status\": \"OK\"}";
+
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to delete item, please see server console for more info.\"}";
         }
     }
+
 
 }

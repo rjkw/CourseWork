@@ -1,7 +1,7 @@
 package Controllers;
 
 import Server.main;
-import com.sun.jersey.multipart.FormDataParam;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.eclipse.jetty.server.Authentication;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -10,13 +10,13 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
+@Path("gameinstance")
 public class GameInstanceController {
     @GET
-    @Path("read")
+    @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public String ReadGI() {
-        System.out.println("thing/list");
+        System.out.println("Game Instance List");
         JSONArray list = new JSONArray();
         try {
             PreparedStatement ps = main.db.prepareStatement("SELECT WordID, Score, UserID FROM GameInstance");
@@ -45,7 +45,7 @@ public class GameInstanceController {
             if (WordID == null || Score == null || UserID == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("thing/new Wordid=" + WordID);
+            System.out.println("New Word =" + WordID);
 
             PreparedStatement ps = main.db.prepareStatement("INSERT INTO GameInstance (WordID, Score, UserID) VALUES (?, ?, ?)");
             ps.setInt(1, WordID);
@@ -70,7 +70,7 @@ public class GameInstanceController {
             if (WordID == null || Score == null || UserID == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("thing/update id=" + WordID);
+            System.out.println("update id=" + WordID);
 
             PreparedStatement ps = main.db.prepareStatement("UPDATE GameInstance SET Name = ?, Quantity = ? WHERE Id = ?");
             ps.setInt(1, WordID);

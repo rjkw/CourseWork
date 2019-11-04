@@ -7,7 +7,6 @@
     <groupId>CourseWork</groupId>
 <artifactId>CourseWork</artifactId>
 <version>1.0-SNAPSHOT</version>
-
     <build>
         <plugins>
             <plugin>
@@ -107,7 +106,7 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-util</artifactId>
             <version>9.4.18.v20190429</version>
-        </  dependency>
+        </dependency>
 
         <!-- Java Architecture for XML Binding (JAXB) -->
 
