@@ -1,33 +1,44 @@
+package Controllers;
+
+import Server.main;
+import com.sun.jersey.multipart.FormDataParam;
+import org.eclipse.jetty.server.Authentication;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UserTableController {
-    public static void ReadUT() {
-
+    @GET
+    @Path("list")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String readUT() {
+        System.out.println("read");
+        JSONArray list = new JSONArray();
         try {
-
-            PreparedStatement ps = main.db.prepareStatement("SELECT UserID,FirstName,LastName,UserName,Email,Password FROM UserTable"); // This allows me to read the database.
-
+            PreparedStatement ps = main.db.prepareStatement("SELECT UserID, FirstName, LastName, UserName, Email, Password FROM UserTable");
             ResultSet results = ps.executeQuery();
             while (results.next()) {
-                int UserID = results.getInt(1);
-                String FirstName = results.getString(2);
-                String LastName = results.getString(3);
-                String Username = results.getString(4);
-                String Email = results.getString(5);
-                String Password = results.getString(6);
-                System.out.println("UserID: " + UserID + ",  ");
-                System.out.println("FirstName: " + FirstName + ",  ");
-                System.out.println("LastName : " + LastName + " ");
-                System.out.println("UserName :"  + Username + " ");
-                System.out.println("Email :" + Email + " ");
-                System.out.println("Password :" + Password + " ");
-            }
+                JSONObject item = new JSONObject();
+                item.put("UserID", results.getInt(1));
+                item.put("FirstName"), results.getString(2);
+                item.put("LastName"), results.getString(3 );
+                item.put("UserName"), results.getString(4);
+                item.put("Email"), results.getString(5);
+                item.put("Password"), results.getString(6);
 
+                list.add(item);
+            }
+            return list.toString();
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
         }
     }
+
     public static void insetUT (int UserId,String FirstName, String LastName, String UserName, String Email,String Password) { // This allows me to insert into the database.
 
         try {
