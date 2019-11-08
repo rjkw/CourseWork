@@ -40,7 +40,7 @@ public class leaderboardController {
     @Path("new")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String insertThing(
+    public String insertLB(
             @FormDataParam("Score") Integer Score, @FormDataParam("Placement") Integer Placement, @FormDataParam("UserID") Integer UserID) {
         try {
             if (Score == null || Placement == null || UserID == null) {
@@ -65,7 +65,7 @@ public class leaderboardController {
     @Path("update")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String updateThing(
+    public String updateLB(
             @FormDataParam("Score") Integer Score, @FormDataParam("Placement") Integer Placement, @FormDataParam("UserID") Integer UserID) {
         try {
             if (Score == null || Placement == null || UserID == null) {
@@ -89,7 +89,7 @@ public class leaderboardController {
     @Path("delete")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String deleteThing(@FormDataParam("Placement") Integer Placement) {
+    public String deleteLB(@FormDataParam("Placement") Integer Placement) {
 
         try {
             if (Placement == null) {

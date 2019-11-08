@@ -36,6 +36,32 @@ public class WordsController {
         }
     }
 
+    @GET
+    @Path("single/{WordID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getWordWC(@PathParam("WordID") Integer WordID){
+        System.out.println("Single Word listed :" + WordID);
+        JSONObject item = new JSONObject();
+        try {
+            if (WordID == null) {
+                throw new Exception("WordID does not match any existing WordID");
+            }
+            PreparedStatement ps = main.db.prepareStatement("SELECT Definition, Difficulty FROM Words WHERE WordID = ?");
+            ps.setInt(1, WordID);
+            ResultSet results = ps.executeQuery();
+
+            if (results.next()) {
+                item.put("WordID", WordID);
+                item.put("Definition", results.getString(1));
+                item.put("Difficulty", results.getInt(2));
+            }
+            return item.toString();
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to get item, please see server console for more info.\"}";
+        }
+    }
+
     @POST
     @Path("new")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
