@@ -97,7 +97,7 @@ public class leaderboardController {
             }
             System.out.println("Ranking deleted placement = " + Placement);
 
-            PreparedStatement ps = main.db.prepareStatement("DELETE FROM Words WHERE Placement = ?");
+            PreparedStatement ps = main.db.prepareStatement("DELETE FROM Leaderboard WHERE Placement = ?");
 
             ps.setInt(1, Placement);
 
