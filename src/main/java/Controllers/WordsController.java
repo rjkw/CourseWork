@@ -67,17 +67,16 @@ public class WordsController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String createWC(
-            @FormDataParam("WordID") Integer WordID, @FormDataParam("Definition") String Definition, @FormDataParam("Difficulty") Integer Difficulty) {
+          @FormDataParam("Definition") String Definition, @FormDataParam("Difficulty") Integer Difficulty) {
         try {
-            if (WordID == null || Definition == null || Difficulty == null) {
+            if (Definition == null || Difficulty == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("New Word Added" + WordID);
+            System.out.println("New Word Added" + Definition);
 
-            PreparedStatement ps = main.db.prepareStatement("INSERT INTO Words (WordID, Definition, Difficulty) VALUES (?, ?, ?)");
-            ps.setInt(1, WordID);
-            ps.setString(2, Definition);
-            ps.setInt(3, Difficulty);
+            PreparedStatement ps = main.db.prepareStatement("INSERT INTO Words (Definition, Difficulty) VALUES (?, ?)");
+            ps.setString(1, Definition);
+            ps.setInt(2, Difficulty);
             ps.execute();
             return "{\"status\": \"OK\"}";
 
@@ -117,7 +116,7 @@ public class WordsController {
     @Path("delete")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String deleteThing(@FormDataParam("WordID") Integer WordID) {
+    public String deleteword(@FormDataParam("WordID") Integer WordID) {
 
         try {
             if (WordID == null) {

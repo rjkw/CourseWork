@@ -19,7 +19,7 @@ public class UserTableController {
         System.out.println("read");
         JSONArray list = new JSONArray();
         try {
-            PreparedStatement ps = main.db.prepareStatement("SELECT UserID, firstName, lastName, userName, Email, Password FROM UserTable");
+            PreparedStatement ps = main.db.prepareStatement("SELECT UserID, firstName, lastName, userName, Email FROM UserTable");
             ResultSet results = ps.executeQuery();
             while (results.next()) {
                 JSONObject item = new JSONObject();
@@ -30,6 +30,27 @@ public class UserTableController {
                 item.put("Email", results.getString(5));
                 item.put("Password", results.getString(6));
 
+                list.add(item);
+            }
+            return list.toString();
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
+        }
+    }
+
+    @GET
+    @Path("emails")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String listemails() {
+        System.out.println("List of all emails");
+        JSONArray list = new JSONArray();
+        try {
+            PreparedStatement ps = main.db.prepareStatement("SELECT Email FROM UserTable");
+            ResultSet results = ps.executeQuery();
+            while (results.next()) {
+                JSONObject item = new JSONObject();
+                item.put("Email", results.getString(1));
                 list.add(item);
             }
             return list.toString();
@@ -164,9 +185,9 @@ public class UserTableController {
         }
 
     }
-    @POST
+    @GET
     @Path("logout")
-    public void logout(@CookieParam("sessionToken") String token) {
+    public void logout(@CookieParam("sessiontoken") String token) {
 
         System.out.println("/admin/logout - Logging out user: ");
 
@@ -179,6 +200,104 @@ public class UserTableController {
             System.out.println(error);
         }
 
+    }
+    @GET
+    @Path("checkAdmin")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String checkAdmin(@CookieParam("sessiontoken") String sessionToken) {
+
+        System.out.println("/users/checkAdmin");
+
+        String currentUser = validateAdmin(sessionToken);
+
+        if (currentUser == null || currentUser.equals("User")) {
+            System.out.println("Error: Invalid admin session token, You are a user.");
+            return "{\"error\": \"Invalid admin session token, You are a user.\"}";
+        } else {
+            return "{\"UserType\": \"" + currentUser + "\"}";
+        }
+    }
+
+
+    @POST
+    @Path("makeadmin")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String makeAdmin(@FormDataParam("targetuser") String UserID, @CookieParam("sessiontoken") String SessionToken) {
+        try {
+            if (UserID == null || SessionToken == null ) {
+                throw new Exception("One or more form data parameters are missing in the HTTP request.");
+            }
+            String userType = validateAdmin(SessionToken);
+            if(userType == null || userType.equals("User")){
+                throw new Exception("This option is only available to admins. If this is an error, contact the server admin.");
+            }
+            System.out.println("/user/makeadmin");
+            PreparedStatement ps = main.db.prepareStatement("UPDATE UserTable SET userType=? WHERE UserID=?");
+            ps.setString(1, "Admin");
+            ps.setString(2, UserID);
+            ps.executeUpdate();
+            return "{\"User - MadeAdmin, User:\": \"" + UserID + "\"}";
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return "{\"error\": \"Unable to change item, please see server console for more info.\"}";
+        }
+    }
+
+    @POST
+    @Path("makeuser")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String makeUser(@FormDataParam("targetuser") String UserID, @CookieParam("sessiontoken") String SessionToken) {
+        try {
+            if (UserID == null || SessionToken == null ) {
+                throw new Exception("One or more form data parameters are missing in the HTTP request.");
+            }
+            String userType = validateAdmin(SessionToken);
+            if(userType == null || userType.equals("User")){
+                throw new Exception("This option is only available to admins. If this is an error, contact the server admin.");
+            }
+            System.out.println("/user/makeuser");
+            PreparedStatement ps = main.db.prepareStatement("UPDATE UserTable SET userType=? WHERE userName=?");
+            ps.setString(1, "User");
+            ps.setString(2, UserID);
+            ps.executeUpdate();
+            return "{\"User - MadeUser, UserID:\": \"" + UserID + "\"}";
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return "{\"error\": \"Unable to change item, please see server console for more info.\"}";
+        }
+    }
+    public static String validateSessionCookie(String token) {
+        try {
+            PreparedStatement statement = main.db.prepareStatement(
+                    "SELECT userName FROM UserTable WHERE sessionToken = ?"
+            );
+            statement.setString(1, token);
+            ResultSet results = statement.executeQuery();
+            if (results != null && results.next()) {
+                return results.getString("Username");
+            }
+        } catch (Exception resultsException) {
+            String error = "Database error - can't select by id from 'Admins' table: " + resultsException.getMessage();
+
+            System.out.println(error);
+        }
+        return null;
+    }
+
+    public static String validateAdmin(String token){
+        try{
+            PreparedStatement ps = main.db.prepareStatement("SELECT userType FROM UserTable WHERE sessionToken=?");
+            ps.setString(1,token);
+            ResultSet results = ps.executeQuery();
+            if(results != null && results.next()){
+                return results.getString("userType");
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }
 
