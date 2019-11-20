@@ -142,8 +142,7 @@ public class UserTableController {
     @Path("login")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String attemptLogin(@FormDataParam("username") String userName,
-                               @FormDataParam("password") String Password) {
+    public String attemptLogin(@FormDataParam("username") String userName, @FormDataParam("password") String Password) {
 
         try {
 
