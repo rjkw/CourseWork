@@ -40,7 +40,7 @@ public class WordsController {
     @Path("single/{WordID}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getWordWC(@PathParam("WordID") Integer WordID){
-        System.out.println("Single Word listed :" + WordID);
+        System.out.println("Single Word listed - WordID:" + WordID);
         JSONObject item = new JSONObject();
         try {
             if (WordID == null) {
@@ -63,7 +63,7 @@ public class WordsController {
     }
 
     @POST
-    @Path("new")
+    @Path("create   ")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String createWC(
@@ -72,7 +72,7 @@ public class WordsController {
             if (Definition == null || Difficulty == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("New Word Added" + Definition);
+            System.out.println("New Word Added " + Definition);
 
             PreparedStatement ps = main.db.prepareStatement("INSERT INTO Words (Definition, Difficulty) VALUES (?, ?)");
             ps.setString(1, Definition);
@@ -96,12 +96,12 @@ public class WordsController {
             if (WordID == null || Definition == null || Difficulty == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("Word Updated" + WordID);
+            System.out.println("Word Updated at WordID: " + WordID);
 
-            PreparedStatement ps = main.db.prepareStatement("INSERT INTO Words (WordID, Definition, Difficulty) VALUES (?, ?, ?)");
-            ps.setInt(1, WordID);
-            ps.setString(2, Definition);
-            ps.setInt(3, Difficulty);
+            PreparedStatement ps = main.db.prepareStatement("UPDATE Words SET Definition = ?,Difficulty = ? WHERE WordID = ?");
+            ps.setString(1, Definition);
+            ps.setInt(2, Difficulty);
+            ps.setInt(3, WordID);
             ps.execute();
             return "{\"status\": \"OK\"}";
 
@@ -122,7 +122,7 @@ public class WordsController {
             if (WordID == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("Word deleted successfully" + WordID);
+            System.out.println("Word deleted successfully at WordID: " + WordID);
 
             PreparedStatement ps = main.db.prepareStatement("DELETE FROM Words WHERE WordID = ?");
 

@@ -16,10 +16,10 @@ public class UserTableController {
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public String readUT() {
-        System.out.println("read");
+        System.out.println("Printing users");
         JSONArray list = new JSONArray();
         try {
-            PreparedStatement ps = main.db.prepareStatement("SELECT UserID, firstName, lastName, userName, Email FROM UserTable");
+            PreparedStatement ps = main.db.prepareStatement("SELECT UserID, firstName, lastName, userName, Email,Password,userType FROM UserTable");
             ResultSet results = ps.executeQuery();
             while (results.next()) {
                 JSONObject item = new JSONObject();
@@ -29,6 +29,7 @@ public class UserTableController {
                 item.put("userName", results.getString(4));
                 item.put("Email", results.getString(5));
                 item.put("Password", results.getString(6));
+                item.put("Usertype", results.getString(7));
 
                 list.add(item);
             }
@@ -61,7 +62,7 @@ public class UserTableController {
     }
 
     @POST
-    @Path("insert")
+    @Path("create")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String insertGi(
@@ -70,7 +71,7 @@ public class UserTableController {
             if (firstName == null || lastName == null || Email == null || Password == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("New user added" + userName);
+            System.out.println("New user added " + userName);
 
             PreparedStatement ps = main.db.prepareStatement("INSERT INTO UserTable (firstName,lastName,userName,Email,Password) VALUES (?, ?, ?, ?, ?)");
             ps.setString(1, firstName);
@@ -96,7 +97,7 @@ public class UserTableController {
             if (UserID == null || Password == null ) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("user updated at UserID =" + UserID);
+            System.out.println("users password changed at UserID =" + UserID);
 
             PreparedStatement ps = main.db.prepareStatement("UPDATE UserTable SET Password = ? WHERE UserID = ?");
             ps.setString(1, Password);

@@ -16,7 +16,7 @@ public class leaderboardController {
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public String ReadLB() {
-        System.out.println("list the leaderboard");
+        System.out.println("Listing the leaderboards");
         JSONArray list = new JSONArray();
         try {
             PreparedStatement ps = main.db.prepareStatement("SELECT Score, Placement, UserID FROM Leaderboard");
