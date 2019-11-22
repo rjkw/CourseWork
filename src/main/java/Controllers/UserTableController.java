@@ -140,46 +140,46 @@ public class UserTableController {
     }
 
     @POST
-    @Path("login")
+    @Path("login") // The name of the actual path used for calling my API in git bash
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String attemptLogin(@FormDataParam("username") String userName, @FormDataParam("password") String Password) {
+    public String attemptLogin(@FormDataParam("username") String userName, @FormDataParam("password") String Password) { // The data that needs entering by the user to actually use the API
 
-        try {
+        try { // The try statement allows me to define a block of code that is being tested for errors while it is being executed this allows me to 'catch' the error during run time rather than having the API crash the website.
 
-            if (userName == null ||
-                    Password == null) {
-                throw new Exception("One or more form data parameters are missing in the HTTP request.");
+            if (userName == null || // Verification to ensure the data isnt null
+                    Password == null) {// Verification to ensure the data isnt null
+                throw new Exception("One or more form data parameters are missing in the HTTP request."); // The throw statement returns an error to the console allowing me to troubleshoot the issue
             }
 
-            System.out.println("/user/login - Attempt by " + userName);
+            System.out.println("/user/login - Attempt by " + userName); // Confirmation of an attempt printed in the intellij console
 
             PreparedStatement statement1 = main.db.prepareStatement(
-                    "SELECT userName, Password, sessionToken FROM UserTable WHERE userName = ?"
+                    "SELECT userName, Password, sessionToken FROM UserTable WHERE userName = ?" // The actual SQL statement that is run allowing me to communicate with my database and validate the the data entered is consistent and correct
             );
             statement1.setString(1, userName.toLowerCase());
             ResultSet results = statement1.executeQuery();
 
             if (results != null && results.next()) {
-                if (!Password.equals(results.getString("Password"))) {
-                    return "{\"error\": \"Incorrect password\"}";
+                if (!Password.equals(results.getString("Password"))) { // This is the validation of the password to ensure that the password is correct
+                    return "{\"error\": \"Incorrect password\"}"; // Prints password wrong to the git bash terminal
                 }
 
-                String token = UUID.randomUUID().toString();
+                String token = UUID.randomUUID().toString(); // This assigns the session token to the user allowing me to have different access levels etc..
                 PreparedStatement statement2 = main.db.prepareStatement(
                         "UPDATE UserTable SET SessionToken = ? WHERE LOWER(userName) = ?"
                 );
                 statement2.setString(1, token);
                 statement2.setString(2, userName.toLowerCase());
                 statement2.executeUpdate();
-                return "{\"token\": \"" + token + "\"}";
+                return "{\"token\": \"" + token + "\"}"; // Prints to the gitbash terminal showing the new token for the user.
 
             } else {
-                return "{\"error\": \"Can't find user account.\"}";
+                return "{\"error\": \"Can't find user account.\"}"; // Prints the issue that the account doesnt exist to the terminal
             }
 
-        } catch (Exception resultsException) {
-            String error = "Database error - can't process login: " + resultsException.getMessage();
+        } catch (Exception resultsException) { // Final error catching will output to the  console allowing me to troubleshoot
+            String error = "Database error - can't process login: " + resultsException.getMessage(); // Prints to the console telling me the error.
             System.out.println(error);
             return "{\"error\": \"" + error + "\"}";
         }
@@ -189,7 +189,7 @@ public class UserTableController {
     @Path("logout")
     public void logout(@CookieParam("sessiontoken") String token) {
 
-        System.out.println("/admin/logout - Logging out user: ");
+        System.out.println("/admin/logout - User Logged out");
 
         try {
             PreparedStatement statement = main.db.prepareStatement("Update UserTable SET sessionToken = NULL WHERE sessionToken = ?");
@@ -206,7 +206,7 @@ public class UserTableController {
     @Produces(MediaType.APPLICATION_JSON)
     public String checkAdmin(@CookieParam("sessiontoken") String sessionToken) {
 
-        System.out.println("/users/checkAdmin");
+        System.out.println("Admin confirmed");
 
         String currentUser = validateAdmin(sessionToken);
 
@@ -232,7 +232,7 @@ public class UserTableController {
             if(userType == null || userType.equals("User")){
                 throw new Exception("This option is only available to admins. If this is an error, contact the server admin.");
             }
-            System.out.println("/user/makeadmin");
+            System.out.println("User has been made an admin at userID: " + UserID);
             PreparedStatement ps = main.db.prepareStatement("UPDATE UserTable SET userType=? WHERE UserID=?");
             ps.setString(1, "Admin");
             ps.setString(2, UserID);
