@@ -34,6 +34,7 @@ public class UserTableController {
                 list.add(item);
             }
             return list.toString();
+
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
             return "{\"error\": \"Unable to list items, please see server console for more info.\"}";

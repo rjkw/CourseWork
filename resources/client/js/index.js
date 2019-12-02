@@ -10,6 +10,7 @@ function fixSize() {
 
 function pageLoad() {
 
+
     window.addEventListener("resize", fixSize);
     fixSize();
 
@@ -22,11 +23,12 @@ function redraw() {
     const canvas = document.getElementById('typingGame');
     const context = canvas.getContext('2d');
 
-    context.strokeStyle = 'yellow';
+    context.fillStyle = 'gray';
     context.beginPath();
-    context.rect(50, 50, w,h);
-    context.stroke();
+    context.rect(0, 0, w,h);
+    context.fill();
 
+    window.requestAnimationFrame(redraw)
 }
 
 
