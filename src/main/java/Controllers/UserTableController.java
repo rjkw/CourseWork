@@ -259,7 +259,7 @@ public class UserTableController {
                 throw new Exception("This option is only available to admins. If this is an error, contact the server admin.");
             }
             System.out.println("/user/makeuser");
-            PreparedStatement ps = main.db.prepareStatement("UPDATE UserTable SET userType=? WHERE userName=?");
+            PreparedStatement ps = main.db.prepareStatement("UPDATE UserTable SET userType=? WHERE UserID=?");
             ps.setString(1, "User");
             ps.setString(2, UserID);
             ps.executeUpdate();
