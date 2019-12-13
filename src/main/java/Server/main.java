@@ -28,8 +28,6 @@ public class main {
         ServletContextHandler context = new ServletContextHandler(server, "/");
         context.addServlet(servlet, "/*");
 
-
-
         try {
             server.start();
             System.out.println("Server successfully started.");
@@ -37,8 +35,10 @@ public class main {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
         closeDatabase();
     }
+
     private static void openDatabase(String dbFile)
     {
 
