@@ -36,7 +36,7 @@ public class main {
             e.printStackTrace();
         }
         
-        closeDatabase();
+
     }
 
     private static void openDatabase(String dbFile)
