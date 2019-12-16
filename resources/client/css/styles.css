@@ -1,0 +1,23 @@
+h1 {
+
+    text-align:center ;
+    color: WHITE;
+    font-family: "Comic Sans MS";
+}
+
+body {
+    background-color: grey;
+}
+
+a.Start:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 150%;}
+
+
+.Start{
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+#p1{
+    text-align: center;
+}
