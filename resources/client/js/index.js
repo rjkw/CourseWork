@@ -1,4 +1,4 @@
-function clearmenu(){
 
-    console.log("test")
-}
+    function clearmenu() {
+
+    }

@@ -1,3 +1,4 @@
-function clearmenu(){
-    document.getElementById("index").reset();
-}
+
+    function clearmenu() {
+
+    }
