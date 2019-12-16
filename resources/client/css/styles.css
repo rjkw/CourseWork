@@ -20,4 +20,6 @@ a.Start:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 150%;}
 
 #p1{
     text-align: center;
+    user-select: none;
+    cursor: pointer;
 }
