@@ -11,7 +11,7 @@ body {
 
 a.Start:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 150%;}
 a.Leaderboards:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 150%;}
-
+a.Settings:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 150%;}
 
 .Start{
     text-decoration: none;
@@ -20,6 +20,12 @@ a.Leaderboards:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 15
 }
 
 .Leaderboards {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+.Settings {
     text-decoration: none;
     color: white;
     text-align: center;
@@ -37,3 +43,8 @@ a.Leaderboards:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 15
     cursor:pointer;
 }
 
+#p3 {
+    text-align: center;
+    user-select: none;
+    cursor:pointer;
+}
