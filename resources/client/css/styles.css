@@ -2,7 +2,8 @@ h1 {
 
     text-align:center ;
     color: WHITE;
-    font-family: "Comic Sans MS";
+    font-family: co;
+    font-size: 50px;
 }
 
 body {
@@ -35,16 +36,25 @@ a.Settings:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 150%;}
     text-align: center;
     user-select: none;
     cursor: pointer;
+    font-size: 30px;
 }
 
 #p2 {
     text-align: center;
     user-select: none;
     cursor:pointer;
+    font-size: 30px;
 }
 
 #p3 {
     text-align: center;
     user-select: none;
     cursor:pointer;
+    font-size: 30px;
 }
+
+@font-face {
+    font-family: "Hot Sauce";
+    src :url("client/HotSauce.ttf");
+}
+
