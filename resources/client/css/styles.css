@@ -55,6 +55,6 @@ a.Settings:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 150%;}
 
 @font-face {
     font-family: "Hot Sauce";
-    src :url("client/HotSauce.ttf");
+    src :url("client/css/HotSauce.ttf");
 }
 
