@@ -50,6 +50,9 @@ public class Client {
         return getFile("client/favicon.ico");
     }
 
+
+
+
     private static byte[] getFile(String filename) {
         try {
 

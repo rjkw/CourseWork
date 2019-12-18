@@ -6,11 +6,33 @@
     <link rel="stylesheet" type="text/css" href="client/css/styles.css">
     <title>Keyboard Warrior </title>
     <style> body{ overflow:hidden; margin:0px; } </style>
-
+    <script src="client/js/Login.js"></script>
+    <script src="/client/js/js.cookie.js"></script>
 </head>
 
 <h1 id="loh1"> Keyboard Warrior Login </h1>
+<h2 id="loh2"> Please Login to Continue</h2>
 <body>
-Michaels a cutie
+<body onload="pageLoad()">
+<div id="content">
+    <hr />
+    <form id="loginForm">
+        <div class="loginDiv">
+            <label for="username" class="label1">Username: </label>
+            <input type="text" name="username" id="username">
+        </div>
+        <div class="loginDiv">
+            <label for="password" class="label1">Password: </label>
+            <input type="password" name="password" id="password">
+        </div>
+        <div class="loginDiv">
+            <p id="loginButton"><a class="Admin" Value="Login" onclick="login()" >Login</a></p>
+        </div>
+    </form>
+</div>
+<div id="loggedInDetails"></div>
+</body>
+</html>
+
 </body>
 </html>
