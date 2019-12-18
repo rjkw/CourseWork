@@ -188,6 +188,8 @@ public class UserTableController {
     }
     @POST
     @Path("logout")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
     public void logout(@CookieParam("sessionToken") String sessionToken) {
 
         System.out.println("/logout - User Logged out");
@@ -200,6 +202,8 @@ public class UserTableController {
             String error = "Database error - can't update 'Users' table: " + resultsException.getMessage();
             System.out.println(error);
         }
+
+
 
     }
     @GET
