@@ -167,7 +167,7 @@ a.Admin:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;
     outline-color: #000000;
 }
 
-#loginButton {
+#loginButton, #LogOutButton {
     width: 200px;
     text-align: center;
     align-content: center;

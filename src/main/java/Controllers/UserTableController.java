@@ -186,18 +186,18 @@ public class UserTableController {
         }
 
     }
-    @GET
+    @POST
     @Path("logout")
-    public void logout(@CookieParam("sessiontoken") String token) {
+    public void logout(@CookieParam("sessionToken") String sessionToken) {
 
-        System.out.println("/admin/logout - User Logged out");
+        System.out.println("/logout - User Logged out");
 
         try {
             PreparedStatement statement = main.db.prepareStatement("Update UserTable SET sessionToken = NULL WHERE sessionToken = ?");
-            statement.setString(1, token);
+            statement.setString(1, sessionToken);
             statement.executeUpdate();
         } catch (Exception resultsException) {
-            String error = "Database error - can't update 'Admins' table: " + resultsException.getMessage();
+            String error = "Database error - can't update 'Users' table: " + resultsException.getMessage();
             System.out.println(error);
         }
 

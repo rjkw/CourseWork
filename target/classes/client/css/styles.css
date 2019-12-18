@@ -3,40 +3,60 @@ h1 {
     text-align:center ;
 
     color: WHITE;
-    font-family: "Hot Sauce";
-    font-size: 150px;
-    margin-top: 200px;
-    text-shadow: -2px -2px cyan, 2px 2px red;
+    font-family: "hot_sauceitalic";
+    font-size: 250px;
+    margin-top: 125px;
+    margin-bottom: 0px;
+    text-shadow: -2px -2px 10px cyan, 2px 2px 10px red;
+    user-select: none;
 }
-
 
 
 #lh1 {
     text-align:center ;
     color: WHITE;
-    font-family: "Hot Sauce";
+    font-family: "hot_sauceitalic";
     font-size: 100px;
     margin-top: 100px;
+    margin-bottom: 0px;
+}
+#loh2 {
+    text-align:center ;
 
-
+    color: WHITE;
+    font-family: "hot_sauceitalic";
+    font-size: 100px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-shadow: -2px -2px 10px cyan, 2px 2px 10px red;
+    user-select: none;
 }
 
 #sh1 {
     text-align:center ;
     color: WHITE;
-    font-family: "Hot Sauce";
+    font-family: "hot_sauceitalic";
     font-size: 100px;
     margin-top: 100px;
-
+    margin-bottom: 0px;
 }
 
 #loh1 {
     text-align:center ;
     color: WHITE;
-    font-family: "Hot Sauce";
+    font-family: "hot_sauceitalic";
+    font-size: 100px;
+    margin-top: 25px;
+    margin-bottom: 0px;
+}
+
+#Ah1 {
+    text-align:center ;
+    color: WHITE;
+    font-family: "hot_sauceitalic";
     font-size: 100px;
     margin-top: 100px;
-
+    margin-bottom: 0px;
 }
 
 
@@ -44,38 +64,45 @@ body {
     background-color: black;
 }
 
-a.Start:hover, a.Start:active {text-shadow: -2px -2px cyan, 2px 2px red;font-size: 150%;}
-a.Leaderboards:hover, a.Start:active {text-shadow: -2px -2px cyan, 2px 2px red;font-size: 150%;}
-a.Settings:hover, a.Start:active {text-shadow: -2px -2px cyan, 2px 2px red;font-size: 150%;}
-a.Login:hover, a.Start:active {text-shadow: -2px -2px cyan, 2px 2px red;font-size: 150%;}
-
+a.Start:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
+a.Leaderboards:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
+a.Settings:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
+a.Login:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
+a.Admin:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 
 .Start{
     text-decoration: none;
     color: white;
     text-align: center;
-    font-family: "Hot Sauce";
+    font-family: "hot_sauceitalic";
 }
 
 .Leaderboards {
     text-decoration: none;
     color: white;
     text-align: center;
-    font-family: "Hot Sauce";
+    font-family: "hot_sauceitalic";
 }
 
 .Settings {
      text-decoration: none;
      color: white;
      text-align: center;
-    font-family: "Hot Sauce";
+    font-family: "hot_sauceitalic";
  }
 
 .Login {
     text-decoration: none;
     color: white;
     text-align: center;
-    font-family: "Hot Sauce";
+    font-family: "hot_sauceitalic";
+}
+
+.Admin {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    font-family: "hot_sauceitalic";
 }
 
 #p1{
@@ -106,9 +133,76 @@ a.Login:hover, a.Start:active {text-shadow: -2px -2px cyan, 2px 2px red;font-siz
     font-size: 45px;
 }
 
+#p5 {
+    text-align: center;
+    user-select: none;
+    cursor:pointer;
+    font-size: 45px;
+}
+
 @font-face {
-    font-family: "Hot Sauce";
-    src :url("/client/css/HotSauce.ttf");
+    font-family: 'hot_sauceitalic';
+    src: url('hotsauce-webfont.woff2') format('woff2'),
+    url('hotsauce-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+#content {
+    text-align: center;
+}
+
+.loginDiv {
+    font-size: 20pt;
+    margin-top: 40px;
+    margin-left: 20px;
+}
+
+#username, #password {
+    margin-left: 20px;
+    font-size: 14pt;
+    background-color: grey;
+    outline: none;
+    outline-color: #000000;
+}
+
+#loginButton, #LogOutButton {
+    width: 200px;
+    text-align: center;
+    align-content: center;
+    user-select: none;
+    margin-left: 45%;
+    cursor: pointer;
+}
+
+
+.label1 {
+    text-align:center ;
+    color: WHITE;
+    font-family: "hot_sauceitalic";
+    font-size: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    user-select: none;
+}
+
+#loggedInDetails {
+    margin: 0;
+    text-align: right;
+    display: inline;
+    float: right
+}
+
+.deleteButton, #cancelButton {
+    visibility: hidden;
+    background-color: indianred;
+    margin-left: 10px;
+}
+
+.editButton {
+    visibility: hidden;
+    background-color: silver;
 }
 
 

@@ -7,10 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="CourseWorktemo" />
-        <module name="CourseWork" />
+        <module name="rhyscourseworksorry" />
         <module name="Coursework" />
         <module name="CourseWorkTemo" />
-        <module name="rhyscourseworksorry" />
+        <module name="CourseWork" />
       </profile>
     </annotationProcessing>
   </component>
