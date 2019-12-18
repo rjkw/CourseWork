@@ -6,7 +6,7 @@ h1 {
     font-family: "Hot Sauce";
     font-size: 150px;
     margin-top: 200px;
-
+    text-shadow: -2px -2px cyan, 2px 2px red;
 }
 
 
@@ -17,6 +17,7 @@ h1 {
     font-family: "Hot Sauce";
     font-size: 100px;
     margin-top: 100px;
+
 
 }
 
@@ -43,11 +44,11 @@ body {
     background-color: black;
 }
 
-a.Start:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 150%;}
-a.Leaderboards:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 150%;}
-a.Settings:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 150%;}
-a.Login:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 150%;}
-a.IndexHeader:hover, a.Start:active {text-shadow: 1px 1px #FF0000;font-size: 150%;}
+a.Start:hover, a.Start:active {text-shadow: -2px -2px cyan, 2px 2px red;font-size: 150%;}
+a.Leaderboards:hover, a.Start:active {text-shadow: -2px -2px cyan, 2px 2px red;font-size: 150%;}
+a.Settings:hover, a.Start:active {text-shadow: -2px -2px cyan, 2px 2px red;font-size: 150%;}
+a.Login:hover, a.Start:active {text-shadow: -2px -2px cyan, 2px 2px red;font-size: 150%;}
+
 
 .Start{
     text-decoration: none;
