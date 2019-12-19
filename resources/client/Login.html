@@ -6,8 +6,9 @@
     <link rel="stylesheet" type="text/css" href="client/css/styles.css">
     <title>Keyboard Warrior </title>
     <style> body{ overflow:hidden; margin:0px; } </style>
-    <script src="client/js/Login.js"></script>
-    <script src="/client/js/js.cookie.js"></script>
+    <script src="client/js/js.cookie.js"></script>
+    <script src="client/js/login.js"></script>
+
 </head>
 
 <h1 id="loh1"> Keyboard Warrior Login </h1>
@@ -25,9 +26,9 @@
             <input type="password" name="password" id="password">
         </div>
         <div class="loginDiv">
-            <p id="loginButton"><a class="Admin" Value="Login" onclick="login()" >Login</a></p>
-            <p id="LogOutButton"><a class="Admin" Value="LogOut" onclick="logout()" >Logout</a></p>
-            <div id="loggedInDetails"></div>
+            <p id="loginButton"><a class="Admin" Value="Login"  >Login</a></p>
+            <p id="logoutButton"><a class="Admin" Value="LogOut" onclick="logout()" >Logout</a></p>
+
         </div>
     </form>
 </div>

@@ -25,7 +25,7 @@ h1 {
 
     color: WHITE;
     font-family: "hot_sauceitalic";
-    font-size: 100px;
+    font-size: 75px;
     margin-top: 0px;
     margin-bottom: 0px;
     text-shadow: -2px -2px 10px cyan, 2px 2px 10px red;
@@ -170,9 +170,8 @@ a.Admin:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;
 #loginButton, #LogOutButton {
     width: 200px;
     text-align: center;
-    align-content: center;
     user-select: none;
-    margin-left: 45%;
+    margin: auto;
     cursor: pointer;
 }
 

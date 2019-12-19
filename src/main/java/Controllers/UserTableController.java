@@ -166,14 +166,14 @@ public class UserTableController {
                     return "{\"error\": \"Incorrect password\"}"; // Prints password wrong to the git bash terminal
                 }
 
-                String token = UUID.randomUUID().toString(); // This assigns the session token to the user allowing me to have different access levels etc..
+                String sessionToken = UUID.randomUUID().toString(); // This assigns the session token to the user allowing me to have different access levels etc..
                 PreparedStatement statement2 = main.db.prepareStatement(
                         "UPDATE UserTable SET SessionToken = ? WHERE LOWER(userName) = ?"
                 );
-                statement2.setString(1, token);
+                statement2.setString(1, sessionToken);
                 statement2.setString(2, userName.toLowerCase());
                 statement2.executeUpdate();
-                return "{\"token\": \"" + token + "\"}"; // Prints to the gitbash terminal showing the new token for the user.
+                return "{\"sessionToken\": \"" + sessionToken + "\"}"; // Prints to the gitbash terminal showing the new token for the user.
 
             } else {
                 return "{\"error\": \"Can't find user account.\"}"; // Prints the issue that the account doesnt exist to the terminal
@@ -186,26 +186,30 @@ public class UserTableController {
         }
 
     }
-    @POST
+    @GET
     @Path("logout")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public void logout(@CookieParam("sessionToken") String sessionToken) {
+    public String logout(@CookieParam("sessionToken") String sessionToken) {
 
         System.out.println("/logout - User Logged out");
 
         try {
-            PreparedStatement statement = main.db.prepareStatement("Update UserTable SET sessionToken = NULL WHERE sessionToken = ?");
+            PreparedStatement statement = main.db.prepareStatement("UPDATE UserTable SET sessionToken = null WHERE sessionToken = ?");
             statement.setString(1, sessionToken);
             statement.executeUpdate();
+
+            return "{\"status\": \"OK\"}";
+
         } catch (Exception resultsException) {
             String error = "Database error - can't update 'Users' table: " + resultsException.getMessage();
             System.out.println(error);
+            return "{\"error\": \"" + error + "\"}";
         }
 
-
-
     }
+
+
     @GET
     @Path("checkAdmin")
     @Produces(MediaType.APPLICATION_JSON)
@@ -273,12 +277,12 @@ public class UserTableController {
             return "{\"error\": \"Unable to change item, please see server console for more info.\"}";
         }
     }
-    public static String validateSessionCookie(String token) {
+    public static String validateSessionCookie(String sessionToken) {
         try {
             PreparedStatement statement = main.db.prepareStatement(
                     "SELECT userName FROM UserTable WHERE sessionToken = ?"
             );
-            statement.setString(1, token);
+            statement.setString(1, sessionToken);
             ResultSet results = statement.executeQuery();
             if (results != null && results.next()) {
                 return results.getString("Username");
