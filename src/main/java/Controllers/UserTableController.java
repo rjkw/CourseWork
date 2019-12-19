@@ -1,6 +1,9 @@
 package Controllers;
 
+
+
 import Server.main;
+import jdk.jshell.Snippet;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.eclipse.jetty.server.Authentication;
 import org.json.simple.JSONArray;
@@ -213,17 +216,20 @@ public class UserTableController {
     @GET
     @Path("checkAdmin")
     @Produces(MediaType.APPLICATION_JSON)
-    public String checkAdmin(@CookieParam("sessiontoken") String sessionToken) {
+    public String checkAdmin(@CookieParam("sessiontoken") String sessionToken  ) {
 
         System.out.println("Admin confirmed");
 
         String currentUser = validateAdmin(sessionToken);
+        boolean status;
+        if (currentUser == null || currentUser.equals("User" )) {
 
-        if (currentUser == null || currentUser.equals("User")) {
             System.out.println("Error: Invalid admin session token, You are a user.");
-            return "{\"error\": \"Invalid admin session token, You are a user.\"}";
+            return "{\"error\": \"Invalid admin session token, You are a user.\"}";  //  not admin
+
         } else {
-            return "{\"UserType\": \"" + currentUser + "\"}";
+            return "{\"UserType\": \"" + currentUser + "\"}"; // admin
+
         }
     }
 
@@ -308,6 +314,8 @@ public class UserTableController {
         }
         return null;
     }
+
+
 }
 
 

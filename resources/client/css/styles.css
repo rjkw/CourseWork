@@ -69,76 +69,23 @@ a.Leaderboards:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5
 a.Settings:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Login:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Admin:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
+a.Logout:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 
-.Start{
+.Start, .Leaderboards, .Settings, .Login , .Admin, .Logout{
     text-decoration: none;
     color: white;
     text-align: center;
     font-family: "hot_sauceitalic";
 }
 
-.Leaderboards {
-    text-decoration: none;
-    color: white;
-    text-align: center;
-    font-family: "hot_sauceitalic";
-}
 
-.Settings {
-     text-decoration: none;
-     color: white;
-     text-align: center;
-    font-family: "hot_sauceitalic";
- }
-
-.Login {
-    text-decoration: none;
-    color: white;
-    text-align: center;
-    font-family: "hot_sauceitalic";
-}
-
-.Admin {
-    text-decoration: none;
-    color: white;
-    text-align: center;
-    font-family: "hot_sauceitalic";
-}
-
-#p1{
+#p1, #p2 , #p3, #p4, #p5, #p6{
     text-align: center;
     user-select: none;
     cursor: pointer;
     font-size: 45px;
 }
 
-#p2 {
-    text-align: center;
-    user-select: none;
-    cursor:pointer;
-    font-size: 45px;
-}
-
-#p3 {
-    text-align: center;
-    user-select: none;
-    cursor:pointer;
-    font-size: 45px;
-}
-
-#p4 {
-    text-align: center;
-    user-select: none;
-    cursor:pointer;
-    font-size: 45px;
-}
-
-#p5 {
-    text-align: center;
-    user-select: none;
-    cursor:pointer;
-    font-size: 45px;
-}
 
 @font-face {
     font-family: 'hot_sauceitalic';
@@ -173,9 +120,13 @@ a.Admin:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;
     user-select: none;
     margin: auto;
     cursor: pointer;
+
 }
 
+#username, #password {
+   background-color: white;
 
+}
 .label1 {
     text-align:center ;
     color: WHITE;

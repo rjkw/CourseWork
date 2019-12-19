@@ -23,7 +23,7 @@ function login() {
         if (responseData.hasOwnProperty('error')) {
             alert(responseData.error);
         } else {
-            alert("poop");
+
             Cookies.set("sessionToken", responseData.sessionToken);
 
             window.location.href = '/client/index.html';
@@ -31,22 +31,3 @@ function login() {
     });
 }
 
-function logout() {
-
-    fetch("/users/logout", {method: 'get'}
-    ).then(response => response.json()
-    ).then(responseData => {
-        if (responseData.hasOwnProperty('error')) {
-            alert(responseData.error);
-
-        } else {
-
-            Cookies.remove("userName");
-            Cookies.remove("sessionToken");
-
-            window.location.href = '/client/Login.html';
-
-        }
-    });
-
-}
