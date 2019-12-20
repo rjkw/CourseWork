@@ -120,9 +120,13 @@ a.Logout:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red
     user-select: none;
     margin: auto;
     cursor: pointer;
+
 }
 
+#username, #password {
+   background-color: white;
 
+}
 .label1 {
     text-align:center ;
     color: WHITE;

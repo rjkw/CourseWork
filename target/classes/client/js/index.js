@@ -3,20 +3,25 @@ function pageLoad() {
 
 
 const sessionToken =Cookies.get("sessionToken")
+
     if (sessionToken === undefined ) {
-        showThing("logged out")
+        showLoginLogOut("logged out");
 
     } else {
-        showThing("logged in");
+        showLoginLogOut("logged in");
     }
 
+    if (sessionToken === undefined) {
+    } else {
+        checkadmin(sessionToken)
+    }
 
 
 
     document.getElementById("p6").addEventListener("click", function() {logout( );});
 }
 
-function showThing(option ) {
+function showLoginLogOut(option) {
 
     if (option == "logged out") {
         document.getElementById("p6").style.display = "none";
@@ -29,6 +34,15 @@ function showThing(option ) {
 
 }
 
+function hideadmin(userType) {
+    if (userType == adminstatus) {
+        document.getElementById("p5").style.display = "block";
+
+    } else {
+        document.getElementById("p5").style.display = "none";
+    }
+
+}
 
 function logout() {
 
@@ -47,4 +61,26 @@ function logout() {
         }
     });
 
+}
+
+
+function checkadmin() {
+    var adminnstatus = false;
+    fetch("/users/checkAdmin", {method: 'get'}
+    ).then(response => response.json()
+    ).then(responseData => {
+
+        if (responseData.hasOwnProperty('error')) {
+            if (results = false) {
+                adminnstatus=false;
+                alert("bad poop")
+            } else if (results=true) {
+                adminnstatus=true;
+                alert("good poop")
+            }
+        } else {
+            alert(responseData.error);
+
+        }
+    });
 }

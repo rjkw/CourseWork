@@ -3,13 +3,18 @@ function pageLoad() {
 
 
 const sessionToken =Cookies.get("sessionToken")
+
     if (sessionToken === undefined ) {
-        showLoginLogOut("logged out")
+        showLoginLogOut("logged out");
 
     } else {
         showLoginLogOut("logged in");
     }
 
+    if (sessionToken === undefined) {
+    } else {
+        checkadmin(sessionToken)
+    }
 
 
 
@@ -56,4 +61,26 @@ function logout() {
         }
     });
 
+}
+
+
+function checkadmin() {
+    var adminnstatus = false;
+    fetch("/users/checkAdmin", {method: 'get'}
+    ).then(response => response.json()
+    ).then(responseData => {
+
+        if (responseData.hasOwnProperty('error')) {
+            if (currentUser = false) {
+                adminnstatus=false;
+                alert("User")
+            } else if (currentUser=true) {
+                adminnstatus=true;
+                alert("Admin")
+            }
+        } else {
+            alert(responseData.error);
+
+        }
+    });
 }

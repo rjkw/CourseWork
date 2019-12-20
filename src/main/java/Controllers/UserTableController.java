@@ -73,7 +73,7 @@ public class UserTableController {
            @FormDataParam("firstName") String firstName, @FormDataParam("lastName") String lastName, @FormDataParam("userName") String userName, @FormDataParam("Email")String Email,@FormDataParam("Password")String Password) {
         try {
             if (firstName == null || lastName == null || Email == null || Password == null) {
-                throw new Exception("One or more form data parameters are missing in the HTTP request.");
+                  throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("New user added " + userName);
 
@@ -159,9 +159,9 @@ public class UserTableController {
             System.out.println("/user/login - Attempt by " + userName); // Confirmation of an attempt printed in the intellij console
 
             PreparedStatement statement1 = main.db.prepareStatement(
-                    "SELECT userName, Password, sessionToken FROM UserTable WHERE userName = ?" // The actual SQL statement that is run allowing me to communicate with my database and validate the the data entered is consistent and correct
+                    "SELECT userName, Password FROM UserTable WHERE userName = ?" // The actual SQL statement that is run allowing me to communicate with my database and validate the the data entered is consistent and correct
             );
-            statement1.setString(1, userName.toLowerCase());
+            statement1.setString(1, userName);
             ResultSet results = statement1.executeQuery();
 
             if (results != null && results.next()) {
@@ -213,25 +213,6 @@ public class UserTableController {
     }
 
 
-    @GET
-    @Path("checkAdmin")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String checkAdmin(@CookieParam("sessiontoken") String sessionToken  ) {
-
-        System.out.println("Admin confirmed");
-
-        String currentUser = validateAdmin(sessionToken);
-        boolean status;
-        if (currentUser == null || currentUser.equals("User" )) {
-
-            System.out.println("Error: Invalid admin session token, You are a user.");
-            return "{\"error\": \"Invalid admin session token, You are a user.\"}";  //  not admin
-
-        } else {
-            return "{\"UserType\": \"" + currentUser + "\"}"; // admin
-
-        }
-    }
 
 
     @POST
@@ -243,8 +224,8 @@ public class UserTableController {
             if (UserID == null || SessionToken == null ) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            String userType = validateAdmin(SessionToken);
-            if(userType == null || userType.equals("User")){
+            boolean userType = validateAdmin(SessionToken);
+            if(userType == false){
                 throw new Exception("This option is only available to admins. If this is an error, contact the server admin.");
             }
             System.out.println("User has been made an admin at userID: " + UserID);
@@ -268,8 +249,8 @@ public class UserTableController {
             if (UserID == null || SessionToken == null ) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            String userType = validateAdmin(SessionToken);
-            if(userType == null || userType.equals("User")){
+            boolean userType = validateAdmin(SessionToken);
+            if(userType ==  false ){
                 throw new Exception("This option is only available to admins. If this is an error, contact the server admin.");
             }
             System.out.println("/user/makeuser");
@@ -301,21 +282,44 @@ public class UserTableController {
         return null;
     }
 
-    public static String validateAdmin(String token){
-        try{
-            PreparedStatement ps = main.db.prepareStatement("SELECT userType FROM UserTable WHERE sessionToken=?");
-            ps.setString(1,token);
-            ResultSet results = ps.executeQuery();
-            if(results != null && results.next()){
-                return results.getString("userType");
-            }
-        }catch (Exception e){
-            System.out.println(e.getMessage());
+    @GET
+    @Path("checkAdmin")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String checkAdmin(@CookieParam("sessiontoken") String sessionToken  ) {
+
+        System.out.println("Admin confirmed");
+
+        boolean currentUser = validateAdmin(sessionToken);
+
+        if (currentUser == false)   {
+            System.out.println("Error: Invalid admin session token, You are a user.");
+            return "{\"error\": \"Invalid admin session token, You are a user.\"}";  //  not admin false
+
+        } else {
+            return "{\"UserType\": \"" + currentUser + "\"}"; // admin true
+
         }
-        return null;
     }
 
 
+    public static boolean validateAdmin(String token) {
+        try {
+            PreparedStatement ps = main.db.prepareStatement("SELECT userType FROM UserTable WHERE sessionToken=?");
+            ps.setString(1, token);
+            ResultSet results = ps.executeQuery();
+            if (results != null && results.next()) {
+                if (results == null || results.equals("User")) {
+                    return (false); // user
+                } else {
+                    return (true); // admin
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+
+        }
+     return (false);
+    }
 }
 
 
