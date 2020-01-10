@@ -1,6 +1,9 @@
+var adminstatus = new Boolean(false);
 function pageLoad() {
 
 const sessionToken =Cookies.get("sessionToken")
+    alert(adminstatus);
+    document.getElementById("p5").style.display = "none";
 
     if (sessionToken === undefined ) {
         showLoginLogOut("logged out");
@@ -10,12 +13,11 @@ const sessionToken =Cookies.get("sessionToken")
     }
 
     if (sessionToken === undefined) {
-
     } else {
-
         checkadmin()
     }
 
+    hideadmin()
 
 
     document.getElementById("p6").addEventListener("click", function() {logout( );});
@@ -35,9 +37,8 @@ function showLoginLogOut(option) {
 }
 
 function hideadmin(userType) {
-    if (userType == adminstatus) {
+    if (adminstatus === true) {
         document.getElementById("p5").style.display = "block";
-
     } else {
         document.getElementById("p5").style.display = "none";
     }
@@ -65,7 +66,7 @@ function logout() {
 
 
 function checkadmin() {
-
+var currentUser;
     fetch("/users/checkAdmin", {method: 'get'}
     ).then(response => response.json()
     ).then(responseData => {
@@ -73,10 +74,10 @@ function checkadmin() {
             alert(responseData.error);
 
         } else {
-            if (responseData  === "Admin") {
-                alert("Admin")
+            if (responseData.UserType === "Admin" ){
+                adminstatus = true;
             } else {
-                alert("User")
+                adminstatus = false;
 
             }
         }

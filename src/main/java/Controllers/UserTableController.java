@@ -224,7 +224,7 @@ public class UserTableController {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             String userType = validateAdmin(SessionToken);
-            if (userType.equals()) {
+            if (userType.equals("User")) {
                 throw new Exception("This option is only available to admins. If this is an error, contact the server admin.");
             }
             System.out.println("User has been made an admin at userID: " + UserID);
@@ -249,7 +249,7 @@ public class UserTableController {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             String userType = validateAdmin(SessionToken);
-            if (userType.equals()) {
+            if (userType.equals("User")) {
                 throw new Exception("This option is only available to admins. If this is an error, contact the server admin.");
             }
             System.out.println("/user/makeuser");
@@ -285,30 +285,31 @@ public class UserTableController {
     @GET
     @Path("checkAdmin")
     @Produces(MediaType.APPLICATION_JSON)
-    public String checkAdmin(@CookieParam("SessionToken") String sessionToken) {
+    public String checkAdmin(@CookieParam("sessionToken") String sessionToken) {
 
         System.out.println("/users/checkAdmin");
 
         String currentUser = validateAdmin(sessionToken);
-
         if (currentUser == null || currentUser.equals("User")) {
-            System.out.println("Error: Invalid admin session token");
-            return "{\"error\": \"Invalid admin session token\"}";
+            return "{\"UserType\": \"" + currentUser + "\"}"; // user
         } else {
-            return "{\"UserType\": \"" + currentUser + "\"}";
+            return "{\"UserType\": \"" + currentUser + "\"}"; // admin
         }
     }
 
-    public static String validateAdmin(String token) {
+    public static String validateAdmin(String sessionToken) {
         try {
             PreparedStatement ps = main.db.prepareStatement("SELECT userType FROM UserTable WHERE sessionToken=?");
-            ps.setString(1, token);
+            ps.setString(1, sessionToken);
             ResultSet results = ps.executeQuery();
             if (results != null && results.next()) {
-                return results.getString("UserType");
+                System.out.println("idk" + results.getString("userType"));
+                return results.getString("userType");
+
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println("Bigger uhoh");
         }
         return null;
     }

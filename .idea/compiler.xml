@@ -13,6 +13,7 @@
         <module name="CourseWorkProperOneUseThisOne" />
         <module name="CourseWork" />
         <module name="rhyscourseworksorry" />
+        <module name="CourseWorkUptoDate" />
       </profile>
     </annotationProcessing>
   </component>
