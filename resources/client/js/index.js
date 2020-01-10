@@ -1,7 +1,5 @@
 function pageLoad() {
 
-
-
 const sessionToken =Cookies.get("sessionToken")
 
     if (sessionToken === undefined ) {
@@ -12,8 +10,10 @@ const sessionToken =Cookies.get("sessionToken")
     }
 
     if (sessionToken === undefined) {
+
     } else {
-        checkadmin(sessionToken)
+
+        checkadmin()
     }
 
 
@@ -65,22 +65,21 @@ function logout() {
 
 
 function checkadmin() {
-    var adminnstatus = false;
+
     fetch("/users/checkAdmin", {method: 'get'}
     ).then(response => response.json()
     ).then(responseData => {
-
         if (responseData.hasOwnProperty('error')) {
-            if (currentUser = false) {
-                adminnstatus=false;
-                alert("User")
-            } else if (currentUser=true) {
-                adminnstatus=true;
-                alert("Admin")
-            }
-        } else {
             alert(responseData.error);
 
+        } else {
+            if (responseData  === "Admin") {
+                alert("Admin")
+            } else {
+                alert("User")
+
+            }
         }
     });
 }
+

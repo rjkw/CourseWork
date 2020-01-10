@@ -28,7 +28,7 @@ public class UserTableController {
                 JSONObject item = new JSONObject();
                 item.put("UserID", results.getInt(1));
                 item.put("firstName", results.getString(2));
-                item.put("lastName", results.getString(3 ));
+                item.put("lastName", results.getString(3));
                 item.put("userName", results.getString(4));
                 item.put("Email", results.getString(5));
                 item.put("Password", results.getString(6));
@@ -70,10 +70,10 @@ public class UserTableController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String insertGi(
-           @FormDataParam("firstName") String firstName, @FormDataParam("lastName") String lastName, @FormDataParam("userName") String userName, @FormDataParam("Email")String Email,@FormDataParam("Password")String Password) {
+            @FormDataParam("firstName") String firstName, @FormDataParam("lastName") String lastName, @FormDataParam("userName") String userName, @FormDataParam("Email") String Email, @FormDataParam("Password") String Password) {
         try {
             if (firstName == null || lastName == null || Email == null || Password == null) {
-                  throw new Exception("One or more form data parameters are missing in the HTTP request.");
+                throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("New user added " + userName);
 
@@ -96,9 +96,9 @@ public class UserTableController {
     @Path("changepass")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String changepass( @FormDataParam("UserID") Integer UserID, @FormDataParam("password") String Password) {
+    public String changepass(@FormDataParam("UserID") Integer UserID, @FormDataParam("password") String Password) {
         try {
-            if (UserID == null || Password == null ) {
+            if (UserID == null || Password == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("users password changed at UserID =" + UserID);
@@ -189,6 +189,7 @@ public class UserTableController {
         }
 
     }
+
     @GET
     @Path("logout")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -213,19 +214,17 @@ public class UserTableController {
     }
 
 
-
-
     @POST
     @Path("makeadmin")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String makeAdmin(@FormDataParam("targetuser") String UserID, @CookieParam("sessiontoken") String SessionToken) {
         try {
-            if (UserID == null || SessionToken == null ) {
+            if (UserID == null || SessionToken == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            boolean userType = validateAdmin(SessionToken);
-            if(userType == false){
+            String userType = validateAdmin(SessionToken);
+            if (userType.equals()) {
                 throw new Exception("This option is only available to admins. If this is an error, contact the server admin.");
             }
             System.out.println("User has been made an admin at userID: " + UserID);
@@ -234,7 +233,7 @@ public class UserTableController {
             ps.setString(2, UserID);
             ps.executeUpdate();
             return "{\"User - MadeAdmin, User:\": \"" + UserID + "\"}";
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return "{\"error\": \"Unable to change item, please see server console for more info.\"}";
         }
@@ -246,11 +245,11 @@ public class UserTableController {
     @Produces(MediaType.APPLICATION_JSON)
     public String makeUser(@FormDataParam("targetuser") String UserID, @CookieParam("sessiontoken") String SessionToken) {
         try {
-            if (UserID == null || SessionToken == null ) {
+            if (UserID == null || SessionToken == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            boolean userType = validateAdmin(SessionToken);
-            if(userType ==  false ){
+            String userType = validateAdmin(SessionToken);
+            if (userType.equals()) {
                 throw new Exception("This option is only available to admins. If this is an error, contact the server admin.");
             }
             System.out.println("/user/makeuser");
@@ -259,11 +258,12 @@ public class UserTableController {
             ps.setString(2, UserID);
             ps.executeUpdate();
             return "{\"User - MadeUser, UserID:\": \"" + UserID + "\"}";
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return "{\"error\": \"Unable to change item, please see server console for more info.\"}";
         }
     }
+
     public static String validateSessionCookie(String sessionToken) {
         try {
             PreparedStatement statement = main.db.prepareStatement(
@@ -285,30 +285,61 @@ public class UserTableController {
     @GET
     @Path("checkAdmin")
     @Produces(MediaType.APPLICATION_JSON)
-    public String checkAdmin(@CookieParam("sessiontoken") String sessionToken  ) {
+    public String checkAdmin(@CookieParam("SessionToken") String sessionToken) {
 
-        System.out.println("Admin confirmed");
+        System.out.println("/users/checkAdmin");
 
-        boolean currentUser = validateAdmin(sessionToken);
+        String currentUser = validateAdmin(sessionToken);
 
-        if (currentUser == false)   {
-            System.out.println("Error: Invalid admin session token, You are a user.");
-            return "{\"error\": \"Invalid admin session token, You are a user.\"}";  //  not admin false
-
+        if (currentUser == null || currentUser.equals("User")) {
+            System.out.println("Error: Invalid admin session token");
+            return "{\"error\": \"Invalid admin session token\"}";
         } else {
-            return "{\"UserType\": \"" + currentUser + "\"}"; // admin true
-
+            return "{\"UserType\": \"" + currentUser + "\"}";
         }
     }
 
-
-    public static boolean validateAdmin(String token) {
+    public static String validateAdmin(String token) {
         try {
             PreparedStatement ps = main.db.prepareStatement("SELECT userType FROM UserTable WHERE sessionToken=?");
             ps.setString(1, token);
             ResultSet results = ps.executeQuery();
             if (results != null && results.next()) {
-                if (results == null || results.equals("User")) {
+                return results.getString("UserType");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+}
+
+ /*   @GET
+    @Path("checkAdmin")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public String checkAdmin(@CookieParam("sessiontoken") String sessionToken  ) {
+
+        boolean currentUser = validateAdmin(sessionToken);
+
+        if (currentUser == false)   {
+            System.out.println("Error: Invalid admin session token, You are a user.");
+            return "User";  //  not admin false
+
+        } else {
+            return "Admin"; // admin true
+
+        }
+    }
+
+
+    public static boolean validateAdmin(String sessionToken) {
+        try {
+            PreparedStatement ps = main.db.prepareStatement("SELECT userType FROM UserTable WHERE sessionToken=?");
+            ps.setString(1, sessionToken);
+            ResultSet results = ps.executeQuery();
+            if (results != null && results.next()) {
+                if (results == null || results.getString(1).equals("User")) {
                     return (false); // user
                 } else {
                     return (true); // admin
@@ -316,11 +347,10 @@ public class UserTableController {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-
         }
-     return (false);
+        return (false);
     }
 }
 
-
+*/
 
