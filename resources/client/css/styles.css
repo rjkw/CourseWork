@@ -126,14 +126,16 @@ a.Logout:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red
 #username, #password {
    background-color: white;
 
+
 }
 .label1 {
     text-align:center ;
     color: WHITE;
     font-family: "hot_sauceitalic";
-    font-size: 20px;
+    font-size:30px;
     margin-top: 0px;
     margin-bottom: 0px;
+    margin-right: 1px;
     user-select: none;
 }
 
