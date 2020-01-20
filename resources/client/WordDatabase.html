@@ -6,11 +6,15 @@
     <link rel="stylesheet" type="text/css" href="client/css/styles.css">
     <title>Keyboard Warrior </title>
     <style> body{ overflow:hidden; margin:0px; } </style>
-
+    <script src="client/js/Management.js"></script>
 </head>
 
 <h1 id="Ah1"> Admin Area </h1>
-<body>
+<body onload="pageLoad()">
+<a id="WordsDatabaseButton" class="Database" onclick="WordTableCreate()">Words</a>
+<a id="UserDatabaseButton" class="Database" onclick="UserTableCreate()">User</a>
+
+<div id="Content"></div>
 
 </body>
 </html>

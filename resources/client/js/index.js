@@ -18,7 +18,7 @@ const sessionToken =Cookies.get("sessionToken")
 
 
 
-    document.getElementById("p6").addEventListener("click", function() {logout( );});
+
 }
 
 function showLoginLogOut(option) {

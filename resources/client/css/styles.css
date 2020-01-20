@@ -70,22 +70,47 @@ a.Settings:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px r
 a.Login:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Admin:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Logout:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
+a.Database:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 
 .Start, .Leaderboards, .Settings, .Login , .Admin, .Logout{
     text-decoration: none;
     color: white;
     text-align: center;
     font-family: "hot_sauceitalic";
+    cursor: pointer;
 }
 
 
 #p1, #p2 , #p3, #p4, #p5, #p6{
     text-align: center;
     user-select: none;
-    cursor: pointer;
     font-size: 45px;
 }
+.Database{
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    font-family: "hot_sauceitalic";
+    cursor: pointer;
+    margin-left: 50px;
+    font-size: 60px;
+    user-select: none;
+}
 
+#Content{
+    color: white;
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid white;
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: left;
+    background-color: #2d2d2d;
+    empty-cells: show;
+    font-family: "Century Gothic";
+}
 
 @font-face {
     font-family: 'hot_sauceitalic';
@@ -119,7 +144,6 @@ a.Logout:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red
     text-align: center;
     user-select: none;
     margin: auto;
-    cursor: pointer;
 
 }
 

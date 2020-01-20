@@ -32,7 +32,7 @@ public class UserTableController {
                 item.put("userName", results.getString(4));
                 item.put("Email", results.getString(5));
                 item.put("Password", results.getString(6));
-                item.put("Usertype", results.getString(7));
+                item.put("userType", results.getString(7));
 
                 list.add(item);
             }
