@@ -1,101 +1,101 @@
-let t = 0, w = 0, h = 0;
-let lastTimestamp = 0;
-function fixSize() {
-    w = window.innerWidth;
-    h = window.innerHeight;
-    const canvas = document.getElementById('typingcanvas');
-    canvas.width = w;
-    canvas.height = h;
+var canvas;
+var canvasContext;
+let x=20;
+var string;
+let score = 0;
+let highscore = 0;
+var lives = 3;
+
+
+
+window.onload = function(){
+    canvas = document.getElementById('typingCanvas');
+    var typeval = document.getElementById("typingValue"); 		//user typed value.
+    canvasContext = canvas.getContext('2d');
+
+    let fps=40;
+    setInterval(function(){
+        if(x==20){
+            string = str(no);
+        }
+        moveEverything()
+        drawEverything(x,string);
+        if(x>900 || check()){
+            x=20;
+            document.getElementById("val").value = ''; 		//if inputed value get match then blank the input box.
+            no++;
+        }
+    },1000/fps)
+
+
 }
 
-function pageLoad() {
+function drawEverything(x,string){
+    canvasContext.fillStyle='black';		//  background colour
+    canvasContext.border="white"
+    canvasContext.fillRect(20,20,canvas.width,canvas.height);
 
-
-    window.addEventListener("resize", fixSize);
-    fixSize();
-    window.requestAnimationFrame(redraw);
-
-    preparewords();
-
-
-
+    drawString(x,string);
+    scoreBoard(score);
+    highScoreBoard(highscore);
 }
 
-function redraw() {
-    const canvas = document.getElementById('typingcanvas');
-    const context = canvas.getContext('2d');
-
-    /*  context.fillStyle = 'gray';
-     context.beginPath();
-     context.rect(0, 0, w,h);
-     context.fill();
- */
-    window.requestAnimationFrame(redraw)
+function moveEverything(){
+    x+=4; // movement speed of the word
 }
 
+let no= Math.floor(Math.random()*3+2); 		//random number between 3 to 5.
 
+function drawString(x,string){
+    canvasContext.font="30px Verdana";
+    canvasContext.fillStyle='gray';
+    canvasContext.fillText(string,x,245);  // place of text appearing.
+}
 
-class Words {
-
-    constructor(x, y) {
-
-        this.x = x;
-        this.y = y;
-        this.dx = 256;
-        this.edge = false;
-        this.alive = true;
-
-
-    }
-
-    draw(context) {
-
-        context.strokeStyle = 'black';
-        context.strokeText("Test");
+function str(len){
+    let random_str='';
+    let random_ascii;
+    for(let i=0;i<=len;i++){
+        random_ascii=Math.floor((Math.random()*25)+97);
+        random_str+=String.fromCharCode(random_ascii);
 
     }
+    return random_str;
+}
 
-    update(frameLength) {
+function check(){
+    var userVal = document.getElementById("val").value;
+    if(userVal==string){
+        return true;
+    }
+    return false;
+}
 
-        this.edge = false;
-        this.x += frameLength * this.dx;
-        if (this.x < 50 || this.x > w - 50) this.edge = true;
-
-        this.reload -= frameLength;
-
+function scoreVal(){
+    if(check()){
+        score++;
     }
 }
 
-function preparewords() {
-    let x = 0;
-    let y = h / 2;
-
-    Words.draw = function (context) {
-        context.strokeStyle = 'black';
-        context.strokeText("Test");
-
+function highScoreVal(){
+    if(score>highscore){
+        highscore=score;
     }
+}
 
-
-    function gameFrame(timestamp) { //
-
-        if (lastTimestamp === 0) lastTimestamp = timestamp;
-        const frameLength = (timestamp - lastTimestamp) / 1000;
-        lastTimestamp = timestamp;
-
-        // inputs();
-        // processes(frameLength);
-        outputs();
-
-        window.requestAnimationFrame(gameFrame);
-
-    }
-
-    function outputs() {
-        const canvas = document.getElementById('invadersCanvas');
-        const context = canvas.getContext('2d');
-
-        Words.draw();
-
-    }
+function scoreBoard(score){
+    scoreVal();
+    canvasContext.fillStyle = "gray";
+    canvasContext.fillText("Your Score: ",50,60);
+    canvasContext.fillStyle = "gray";
+    canvasContext.font = "40px hot_sauceitalic";
+    canvasContext.fillText(score, 250, 60);
+}
+function highScoreBoard(highscore){
+    highScoreVal();
+    canvasContext.fillStyle = "gray";
+    canvasContext.fillText("Your High Score:   ",510,60);
+    canvasContext.fillStyle = "gray";
+    canvasContext.font = "40px hot_sauceitalic";
+    canvasContext.fillText(highscore, 850, 60);
 }

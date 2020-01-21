@@ -3,13 +3,28 @@
 <html>
 <link rel="shortcut icon" href="client/img/Icon.PNG" type="image/x-icon" />
 <head>
+    <script src="client/js/KeyboardWarrior.js"></script>
     <link rel="stylesheet" type="text/css" href="client/css/styles.css">
     <title>Keyboard Warrior </title>
-    <style> body{ overflow:hidden; margin:0px; } </style>
 
 
 </head>
-<body>
-
+<body class="Game">
+<h1 class="GameHeader"> Test your typing skills below.</h1>
+<hr>
+<canvas id="typingCanvas" height="550" width="900"></canvas>
+<hr>
+<table class="GameTable">
+    <tr class="GameTable">
+        <td class="GameTable">
+          <div class="gameDiv">Type Here:</div>
+        </td>
+        <td class="GameTable">
+          <input type="text" name="" id="val" onclick="check()" autofocus>
+     </td>
+    </tr>
+</table>
+<hr>
+<p id="Button1"> <a class="MainMenuButton" href="index.html">Main Menu</a></p>
 </body>
 </html>

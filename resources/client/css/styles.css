@@ -22,7 +22,6 @@ h1 {
 }
 #loh2 {
     text-align:center ;
-
     color: WHITE;
     font-family: "hot_sauceitalic";
     font-size: 75px;
@@ -71,8 +70,9 @@ a.Login:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;
 a.Admin:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Logout:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Database:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
+a.MainMenuButton.hover, a.Start.active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 
-.Start, .Leaderboards, .Settings, .Login , .Admin, .Logout{
+.Start, .Leaderboards, .Settings, .Login , .Admin, .Logout, .MainMenuButton{
     text-decoration: none;
     color: white;
     text-align: center;
@@ -85,6 +85,12 @@ a.Database:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px r
     text-align: center;
     user-select: none;
     font-size: 45px;
+}
+
+#Button1 {
+    text-align: center;
+    user-select: none;
+    font-size:  80px;
 }
 .Database{
     text-decoration: none;
@@ -181,4 +187,46 @@ table, th, td {
     background-color: silver;
 }
 
+.GameHeader {
+    font-size: 50px;
+    margin-top: 0px;
+    user-select: none;
+}
 
+.GameTable {
+    color: white;
+    font-size: 26px;
+    margin-left: 40%;
+    background-color: black;
+    border: 1px solid white;
+
+}
+
+#input {
+    height: 40px;
+    width: 300px;
+    font-size: 19px;
+    border-color: #2d2d2d;
+    padding: 5px;
+    align-content: center;
+}
+
+#typingCanvas{
+    align-content: center;
+    border: 1px solid white;
+    margin-left: 25%;
+
+}
+
+hr{
+    color: gray;
+    border-width: 2px;
+}
+
+.gameDiv {
+    font-family: hot_sauceitalic;
+}
+
+.Game {
+    background-color: black;
+}
