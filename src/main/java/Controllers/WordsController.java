@@ -51,7 +51,6 @@ public class WordsController {
             ResultSet results = ps.executeQuery();
 
             if (results.next()) {
-                item.put("WordID", WordID);
                 item.put("Definition", results.getString(1));
                 item.put("Difficulty", results.getInt(2));
             }
