@@ -9,13 +9,16 @@
 
 
 </head>
-<body class="Game">
-<h1 class="GameHeader"> Test your typing skills below</h1>
-<hr>
+<<body class="Game">
+<h1 class="GameHeader" id="GameHeading"> Test your typing skills below</h1>
+<hr id="gameHR1">
 <canvas id="typingCanvas" height="550" width="900"></canvas>
-<hr>
-<table class="GameTable">
+<hr id="gameHR2">
+<table class="GameTable" id="GameTable">
     <tr class="GameTable">
+        <p id="gameOver"> <a class="gameOverLabel" >GAME OVER </a></p>
+        <p id="scoreText"> <a class="scoreLabel" ></a></p>
+
         <td class="GameTable">
           <div class="gameDiv">Type Here:</div>
         </td>
@@ -24,7 +27,8 @@
      </td>
     </tr>
 </table>
-<hr>
+<hr id="gameHR3">
+<p id="Button2"> <a class="MainMenuButton" href="Game.html">Restart</a></p>
 <p id="Button1"> <a class="MainMenuButton" href="index.html">Main Menu</a></p>
 </body>
 </html>

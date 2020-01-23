@@ -65,6 +65,33 @@ public class UserTableController {
         }
     }
 
+    @GET
+    @Path("userName/{UserID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getUserName(@PathParam("UserID") Integer UserID){
+        System.out.println("Username Associated with this UserID - UserID:" + UserID);
+        JSONObject item = new JSONObject();
+        try {
+            if (UserID == null) {
+                throw new Exception("WordID does not match any existing WordID");
+            }
+            PreparedStatement ps = main.db.prepareStatement("SELECT userName FROM UserTable WHERE UserID = ?");
+            ps.setInt(1, UserID);
+            ResultSet results = ps.executeQuery();
+
+            if (results.next()) {
+                item.put("userName", results.getString(1));
+            }
+            return item.toString();
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to get item, please see server console for more info.\"}";
+        }
+    }
+
+
+
+
     @POST
     @Path("create")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -309,7 +336,6 @@ public class UserTableController {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Bigger uhoh");
         }
         return null;
     }

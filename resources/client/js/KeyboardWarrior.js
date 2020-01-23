@@ -8,13 +8,14 @@ var lives = 3;
 var WordID;
 var difficultyWordID
 
-
-
+// change this onload to a while loop in a minute good sir.
 window.onload = function(){
     canvas = document.getElementById('typingCanvas');
     var typeval = document.getElementById("typingValue"); 		//user typed value.
     canvasContext = canvas.getContext('2d');
-
+    document.getElementById("Button2").style.display = "none";
+    document.getElementById("gameOver").style.display = "none";
+    document.getElementById("scoreText").style.display = "none";
     let fps=40;
     setInterval(function(){
         if(x==20){
@@ -22,6 +23,21 @@ window.onload = function(){
         }
         moveEverything()
         drawEverything(x,string);
+
+        if (x>900) {
+            lives--;
+        } else if (lives<1) {
+              canvas.style.display="none";
+            document.getElementById("Button2").style.display = "block";
+            document.getElementById("GameTable").style.display = "none";
+            document.getElementById("gameHR2").style.display = "none";
+            document.getElementById("gameHR3").style.display = "none";
+            document.getElementById("gameOver").style.display = "block";
+            document.getElementById("scoreText").style.display = "block";
+            document.getElementById("GameHeading").textContent = "Results below: ";
+            document.getElementById("scoreText").textContent = "Your Score: " + score;
+        }
+
         if(x>900 || check()){
             x=20;
             document.getElementById("val").value = ''; 		//if inputed value get match then blank the input box.
@@ -29,7 +45,6 @@ window.onload = function(){
 
         }
     },1000/fps)
-
 
 }
 
@@ -40,6 +55,7 @@ function drawEverything(x,string ){
     drawString(x,string);
     scoreBoard(score);
     highScoreBoard(highscore);
+
 }
 
 function moveEverything(){
@@ -57,7 +73,7 @@ function drawString(x,string) {
 function getWord(WordID) {
     WordID = Math.floor(Math.random()*30) +1
     difficultyWordID = WordID
-    console.log("start" + WordID);
+
     if (WordID === null) {
 
     } else
@@ -117,8 +133,8 @@ function scoreBoard(score){
 function highScoreBoard(highscore){
     highScoreVal();
     canvasContext.fillStyle = "White";
-    canvasContext.fillText("Your High Score:   ",510,60);
+    canvasContext.fillText("Lives:",750,60);
     canvasContext.fillStyle = "White";
     canvasContext.font = "40px hot_sauceitalic";
-    canvasContext.fillText(highscore, 850, 60);
+    canvasContext.fillText(lives, 850, 60);
 }

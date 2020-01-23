@@ -17,7 +17,7 @@ h1 {
     color: WHITE;
     font-family: "hot_sauceitalic";
     font-size: 100px;
-    margin-top: 100px;
+    margin-top: 0px;
     margin-bottom: 0px;
 }
 #loh2 {
@@ -70,7 +70,7 @@ a.Login:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;
 a.Admin:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Logout:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Database:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
-a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
+a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 
 .Start, .Leaderboards, .Settings, .Login , .Admin, .Logout, .MainMenuButton{
     text-decoration: none;
@@ -80,6 +80,16 @@ a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 
     cursor: pointer;
 }
 
+#gameOver, .gameOverLabel, #scoreText, .scoreLabel, #scoreValue{
+    text-align: center;
+    user-select: none;
+    font-size:  100px;
+    margin-top: 0px;
+    color: white;
+    font-family: "hot_sauceitalic";
+    text-shadow: -2px -2px 10px cyan, 2px 2px 10px red;
+    margin-top: 0px;
+}
 
 #p1, #p2 , #p3, #p4, #p5, #p6{
     text-align: center;
@@ -87,10 +97,12 @@ a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 
     font-size: 45px;
 }
 
-#Button1 {
+#Button1, #Button2{
     text-align: center;
     user-select: none;
-    font-size:  80px;
+    font-size:  40px;
+    margin-top: 0px;
+
 }
 .Database{
     text-decoration: none;
@@ -111,14 +123,27 @@ a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 
     overflow: auto;
 }
 
-table, th, td {
-    border: 1px solid white;
+table, th{
+    border: 1px solid black;
     border-collapse: collapse;
     padding: 5px;
     text-align: left;
-    background-color: #2d2d2d;
+    background-color: black;
     empty-cells: show;
-    font-family: "Century Gothic";
+    font-size: 50px;
+    font-family: "Verdana";
+    overflow: auto;
+}
+
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: left;
+    background-color: black;
+    empty-cells: show;
+    font-size: 20px;
+    font-family: "Verdana";
     overflow: auto;
 }
 
@@ -136,14 +161,16 @@ table, th, td {
     font-size: 20pt;
     margin-top: 40px;
     margin-left: 20px;
+    align-content: center;
+    text-align: center;
 }
 
 #username, #password {
     margin-left: 20px;
     font-size: 14pt;
     background-color: grey;
-    outline: none;
-    outline-color: #000000;
+    align-content: center;
+    outline: #000000 none;
 }
 
 #loginButton, #LogOutButton {
