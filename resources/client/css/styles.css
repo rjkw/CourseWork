@@ -72,6 +72,8 @@ a.Logout:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red
 a.Database:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 
+
+
 .Start, .Leaderboards, .Settings, .Login , .Admin, .Logout, .MainMenuButton{
     text-decoration: none;
     color: white;
@@ -115,12 +117,25 @@ a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 
     user-select: none;
 }
 
+#MainMenuButton {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    font-family: "hot_sauceitalic";
+    cursor: pointer;
+    font-size: 60px;
+    user-select: none;
+    margin-bottom: 500px;
+    margin-right: 2000px;
+}
+
 #Content{
     color: white;
     text-align: center;
     width: 1920px;
     height: 650px;
     overflow: auto;
+    user-select: none;
 }
 
 table, th{

@@ -74,7 +74,7 @@ public class leaderboardController {
             }
             System.out.println("Ranking Updated placement = " + Placement);
 
-            PreparedStatement ps = main.db.prepareStatement("INSERT INTO Things (Id, Name, Quantity) VALUES (?, ?, ?)");
+            PreparedStatement ps = main.db.prepareStatement("UPDATE Leaderboard SET Score = ?,Placement = ? WHERE UserID = ?");
             ps.setInt(1, Score);
             ps.setInt(2, Placement);
             ps.setInt(3, UserID);

@@ -7,6 +7,10 @@ let highscore = 0;
 var lives = 3;
 var WordID;
 var difficultyWordID
+var bg = new Image();
+bg.src = "client/img/stars.jpg";
+
+
 
 // change this onload to a while loop in a minute good sir.
 window.onload = function(){
@@ -36,7 +40,26 @@ window.onload = function(){
             document.getElementById("scoreText").style.display = "block";
             document.getElementById("GameHeading").textContent = "Results below: ";
             document.getElementById("scoreText").textContent = "Your Score: " + score;
+
+
+            function updateUserScore() {
+
+                fetch("/leaderboard/update", {method: 'post', body: formData}
+                ).then(response => response.json()
+                ).then(responseData => {
+
+                    if (responseData.hasOwnProperty('error')) {
+                        alert(responseData.error);
+                    } else {
+
+
+
+                    }
+                });
+            }
+
         }
+
 
         if(x>900 || check()){
             x=20;
@@ -47,6 +70,8 @@ window.onload = function(){
     },1000/fps)
 
 }
+
+
 
 function drawEverything(x,string ){
     canvasContext.fillStyle='black';		//  background colour
@@ -69,6 +94,23 @@ function drawString(x,string) {
     canvasContext.fillStyle='gray';
     canvasContext.fillText(string,x,280);  // place of text appearing.
 }
+
+ /* function Background(){
+    this.x = 0, this.y = 0, this.w = bg.width, this.h = bg.height;
+    this.render = function(){
+        canvasContext.drawImage(bg, this.x--, 0);
+        if(this.x <= -499){
+            this.x = 0;
+        }
+    }
+}
+var background = new Background();
+function animate(){
+    background.render();
+    canvasContext.restore();
+}
+var animateInterval = setInterval(animate, 20); */
+
 
 function getWord(WordID) {
     WordID = Math.floor(Math.random()*30) +1
