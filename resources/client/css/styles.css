@@ -254,7 +254,7 @@ td {
     align-content: center;
 }
 
-#typingCanvas{
+#typingCanvas, #backgroundIMG{
     align-content: center;
     border: 1px solid white;
     margin-left: 25%;

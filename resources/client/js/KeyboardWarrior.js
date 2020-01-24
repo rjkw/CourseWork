@@ -8,15 +8,20 @@ var lives = 3;
 var WordID;
 var difficultyWordID
 var bg = new Image();
+var canvas2Context;
+var canvas2
 bg.src = "client/img/stars.jpg";
 
 
 
 // change this onload to a while loop in a minute good sir.
 window.onload = function(){
+
     canvas = document.getElementById('typingCanvas');
     var typeval = document.getElementById("typingValue"); 		//user typed value.
     canvasContext = canvas.getContext('2d');
+    canvas2=document.getElementById('backgroundIMG')
+    canvas2Context = canvas2.getContext('2d');
     document.getElementById("Button2").style.display = "none";
     document.getElementById("gameOver").style.display = "none";
     document.getElementById("scoreText").style.display = "none";
@@ -53,7 +58,6 @@ window.onload = function(){
                     } else {
 
 
-
                     }
                 });
             }
@@ -64,7 +68,7 @@ window.onload = function(){
         if(x>900 || check()){
             x=20;
             document.getElementById("val").value = ''; 		//if inputed value get match then blank the input box.
-            no++;
+
 
         }
     },1000/fps)
@@ -74,12 +78,13 @@ window.onload = function(){
 
 
 function drawEverything(x,string ){
-    canvasContext.fillStyle='black';		//  background colour
+    canvasContext.fillStyle="rgb(0,0,200,0";//  background colour
     canvasContext.border="white"
     canvasContext.fillRect(20,20,canvas.width,canvas.height);
     drawString(x,string);
     scoreBoard(score);
     highScoreBoard(highscore);
+
 
 }
 
@@ -87,7 +92,8 @@ function moveEverything(){
     x+=4; // movement speed of the word
 }
 
-let no= Math.floor(Math.random()*3+2); 		//random number between 3 to 5.
+
+ //random number between 3 to 5.
 
 function drawString(x,string) {
     canvasContext.font="30px Verdana";
@@ -95,21 +101,23 @@ function drawString(x,string) {
     canvasContext.fillText(string,x,280);  // place of text appearing.
 }
 
- /* function Background(){
+  function Background(){
     this.x = 0, this.y = 0, this.w = bg.width, this.h = bg.height;
     this.render = function(){
-        canvasContext.drawImage(bg, this.x--, 0);
+        canvas2Context.drawImage(bg, this.x--, 0);
         if(this.x <= -499){
             this.x = 0;
         }
     }
 }
+
+
 var background = new Background();
 function animate(){
     background.render();
-    canvasContext.restore();
+
 }
-var animateInterval = setInterval(animate, 20); */
+var animateInterval = setInterval(animate, 40);
 
 
 function getWord(WordID) {

@@ -8,7 +8,7 @@ let userName;
             '</tr>';
 
 
-        fetch('/leaderboard/list', {method:     'get'}
+        fetch('/leaderboard/list', {method:'get'}
         ).then(response => response.json()
         ).then(positions => {
             for (let position of positions) {
@@ -22,18 +22,23 @@ let userName;
             document.getElementById("Content").innerHTML = leaderboardHTML;
         });
 
-        fetch("/users/userName/" + UserID, {method: 'get'}
+        fetch("/users/userName/" + UserID, {method: 'post', body: formData}
         ).then(response => response.json()
         ).then(responseData => {
 
             if (responseData.hasOwnProperty('error')) {
                 alert(responseData.error);
             } else {
-                userName =  responseData.userName;
+                userName=responseData.string()
 
             }
         });
 
     }
+
+
+
+
+
 
 
