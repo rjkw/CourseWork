@@ -89,6 +89,30 @@ public class UserTableController {
         }
     }
 
+    @GET
+    @Path("UserID/{sessionToken}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String sessionTokenUserID(@PathParam("sessionToken") String sessionToken){
+        System.out.println("See console - Username Associated with this sessionToken: " + sessionToken);
+        JSONObject item = new JSONObject();
+        try {
+            if (sessionToken == null) {
+                throw new Exception("Session Token is not valid.");
+            }
+            PreparedStatement ps = main.db.prepareStatement("SELECT UserID FROM UserTable WHERE SessionToken = ?");
+            ps.setString(1, sessionToken);
+            ResultSet results = ps.executeQuery();
+
+            if (results.next()) {
+                item.put("UserID", results.getInt(1));
+            }
+            return item.toString();
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to get item, please see server console for more info.\"}";
+        }
+    }
+
 
 
 

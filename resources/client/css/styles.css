@@ -90,7 +90,7 @@ a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 
     color: white;
     font-family: "hot_sauceitalic";
     text-shadow: -2px -2px 10px cyan, 2px 2px 10px red;
-    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 #p1, #p2 , #p3, #p4, #p5, #p6{
@@ -258,6 +258,8 @@ td {
     align-content: center;
     border: 1px solid white;
     margin-left: 25%;
+    left:0px;
+    top:0px;
 
 }
 

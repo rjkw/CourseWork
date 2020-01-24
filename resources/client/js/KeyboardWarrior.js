@@ -8,20 +8,18 @@ var lives = 3;
 var WordID;
 var difficultyWordID
 var bg = new Image();
-var canvas2Context;
-var canvas2
 bg.src = "client/img/stars.jpg";
-
+var UserID
 
 
 // change this onload to a while loop in a minute good sir.
 window.onload = function(){
-
+getUserID()
     canvas = document.getElementById('typingCanvas');
-    var typeval = document.getElementById("typingValue"); 		//user typed value.
     canvasContext = canvas.getContext('2d');
-    canvas2=document.getElementById('backgroundIMG')
-    canvas2Context = canvas2.getContext('2d');
+   /* canvas2=document.getElementById('backgroundIMG')
+    canvas2Context = canvas2.getContext('2d'); */
+    var typeval = document.getElementById("typingValue"); 		//user typed value.
     document.getElementById("Button2").style.display = "none";
     document.getElementById("gameOver").style.display = "none";
     document.getElementById("scoreText").style.display = "none";
@@ -36,7 +34,7 @@ window.onload = function(){
         if (x>900) {
             lives--;
         } else if (lives<1) {
-              canvas.style.display="none";
+            canvas.style.display = "none";
             document.getElementById("Button2").style.display = "block";
             document.getElementById("GameTable").style.display = "none";
             document.getElementById("gameHR2").style.display = "none";
@@ -45,46 +43,60 @@ window.onload = function(){
             document.getElementById("scoreText").style.display = "block";
             document.getElementById("GameHeading").textContent = "Results below: ";
             document.getElementById("scoreText").textContent = "Your Score: " + score;
-
-
-            function updateUserScore() {
-
-                fetch("/leaderboard/update", {method: 'post', body: formData}
-                ).then(response => response.json()
-                ).then(responseData => {
-
-                    if (responseData.hasOwnProperty('error')) {
-                        alert(responseData.error);
-                    } else {
-
-
-                    }
-                });
-            }
-
         }
-
-
         if(x>900 || check()){
             x=20;
             document.getElementById("val").value = ''; 		//if inputed value get match then blank the input box.
-
-
         }
     },1000/fps)
 
 }
 
+function updateUserScore() {
+    let formData = new FormData();
+
+    formData.append("Score", score)
+    formData.append("UserID", UserID)
+    fetch("/leaderboard/update", {method: 'post', body: formData}
+    ).then(response => response.json()
+    ).then(responseData => {
+
+        if (responseData.hasOwnProperty('error')) {
+            alert(responseData.error);
+        } else {
+
+
+        }
+    });
+}
+
+
+
+function getUserID(){
+    var sessionToken = Cookies.get("sessionToken")
+    if(check()){
+        fetch("/users/UserID/"  + sessionToken, {method: 'get'}
+        ).then(response => response.json()
+        ).then(responseData => {
+            if (responseData.hasOwnProperty('error')) {
+                alert(responseData.error);
+            } else {
+                alert(UserID);
+
+            }
+        });
+    }
+}
+
 
 
 function drawEverything(x,string ){
-    canvasContext.fillStyle="rgb(0,0,200,0";//  background colour
-    canvasContext.border="white"
-    canvasContext.fillRect(20,20,canvas.width,canvas.height);
+    canvasContext.fillStyle="black";
+    canvasContext.border="white";
+    canvasContext.fillRect(0,0,canvas.width,canvas.height);
     drawString(x,string);
     scoreBoard(score);
     highScoreBoard(highscore);
-
 
 }
 
@@ -92,16 +104,13 @@ function moveEverything(){
     x+=4; // movement speed of the word
 }
 
-
- //random number between 3 to 5.
-
 function drawString(x,string) {
     canvasContext.font="30px Verdana";
     canvasContext.fillStyle='gray';
     canvasContext.fillText(string,x,280);  // place of text appearing.
 }
-
-  function Background(){
+/*
+function Background(){
     this.x = 0, this.y = 0, this.w = bg.width, this.h = bg.height;
     this.render = function(){
         canvas2Context.drawImage(bg, this.x--, 0);
@@ -110,14 +119,17 @@ function drawString(x,string) {
         }
     }
 }
-
-
 var background = new Background();
+
 function animate(){
+    // Start drawing here
     background.render();
 
+    // End drawing here
+    canvas2Context.restore();
 }
-var animateInterval = setInterval(animate, 40);
+var animateInterval = setInterval(animate, 30);
+*/
 
 
 function getWord(WordID) {

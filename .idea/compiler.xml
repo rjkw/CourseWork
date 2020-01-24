@@ -7,13 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="CourseWorktemo" />
+        <module name="CourseWorkUptoDate" />
         <module name="Courseworkfpusdfldskljfghslk" />
         <module name="CourseWorkTemo" />
         <module name="Coursework" />
         <module name="CourseWorkProperOneUseThisOne" />
         <module name="CourseWork" />
         <module name="rhyscourseworksorry" />
-        <module name="CourseWorkUptoDate" />
+        <module name="CourseWorkAnotherpull" />
         <module name="CourseWorkAnotherPull" />
         <module name="CourseWorkpull" />
       </profile>
