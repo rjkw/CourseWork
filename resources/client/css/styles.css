@@ -36,7 +36,7 @@ h1 {
     color: WHITE;
     font-family: "hot_sauceitalic";
     font-size: 100px;
-    margin-top: 100px;
+    margin-top: 0px;
     margin-bottom: 0px;
 }
 
@@ -54,7 +54,7 @@ h1 {
     color: WHITE;
     font-family: "hot_sauceitalic";
     font-size: 100px;
-    margin-top: 100px;
+    margin-top: 0px;
     margin-bottom: 0px;
 }
 
@@ -66,7 +66,7 @@ body {
 a.Start:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Leaderboards:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Settings:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
-a.Login:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
+a.Login:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 a.Admin:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Logout:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Database:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
@@ -136,18 +136,19 @@ a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 
     height: 650px;
     overflow: auto;
     user-select: none;
+    margin-top: 50px;
 }
 
 table, th{
     border: 1px solid black;
-    border-collapse: collapse;
     padding: 5px;
     text-align: left;
     background-color: black;
     empty-cells: show;
-    font-size: 50px;
+    font-size: 25px;
     font-family: "Verdana";
-    overflow: auto;
+    position: sticky;
+    top: 0;
 }
 
 td {
@@ -160,6 +161,7 @@ td {
     font-size: 20px;
     font-family: "Verdana";
     overflow: auto;
+
 }
 
 @font-face {
@@ -171,9 +173,8 @@ td {
 
 }
 
-
 .loginDiv {
-    font-size: 20pt;
+    font-size: 40px;
     margin-top: 40px;
     margin-left: 20px;
     align-content: center;
@@ -274,4 +275,13 @@ hr{
 
 .Game {
     background-color: black;
+}
+
+#editDiv{
+    align-content: center;
+    text-align: center;
+    color: white;
+    font-family: hot_sauceitalic;
+    font-size: 50px;
+
 }

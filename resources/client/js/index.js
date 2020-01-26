@@ -26,9 +26,11 @@ function showLoginLogOut(option) {
     if (option == "logged out") {
         document.getElementById("p6").style.display = "none";
         document.getElementById("p4").style.display = "block";
+        document.getElementById("p3").style.display = "none"
     } else if (option == "logged in") {
         document.getElementById("p4").style.display = "none";
         document.getElementById("p6").style.display = "block";
+        document.getElementById("p3").style.display = "block"
 
     }
 

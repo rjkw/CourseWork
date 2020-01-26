@@ -3,12 +3,13 @@ function pageLoad() {
 
 }
 
+
 function WordTableCreate() {
     let WordsHTML = `<table align="center">` +
         '<tr>' +
-        '<th style="font-size: 20px">WordID</th>' +
-        `<th style ="font-size: 20px">Definition</th>` +
-        '<th class="last" style="font-size: 20px">Difficulty</th>' +
+        '<th style="position: sticky">WordID</th>' +
+        `<th style="position: sticky">Definition</th>` +
+        '<th class="last" style="position: sticky">Difficulty</th>' +
         '</tr>';
 
 
@@ -31,12 +32,12 @@ function UserTableCreate() {
     let UsersHTML = `<table align="center">` +
 
         '<tr>' +
-        '<th style="font-size: 20px">UserID</th>' +
-        `<th style ="font-size: 20px">Username</th>` +
-        `<th style ="font-size: 20px">FirstName</th>` +
-        `<th style ="font-size: 20px">LastName</th>` +
-        `<th style ="font-size: 20px">Email</th>` +
-        '<th class="last" style="font-size: 20px">UserType</th>' +
+        '<th style="position: sticky">UserID</th>' +
+        `<th style="position: sticky">Username</th>` +
+        `<th style="position: sticky">FirstName</th>` +
+        `<th style="position: sticky">LastName</th>` +
+        `<th style="position: sticky">Email</th>` +
+        '<th class="last" style="position: sticky">UserType</th>' +
         '</tr>';
 
     fetch('/users/list', {method: 'get'}
