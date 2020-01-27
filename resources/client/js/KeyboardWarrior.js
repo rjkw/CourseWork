@@ -1,15 +1,19 @@
-var canvas;
-var canvasContext;
+let canvas;
+let canvasContext;
 let x=20;
-var string;
+let string;
 let score = 0;
 let highscore = 0;
-var lives = 3;
-var WordID;
-var difficultyWordID
-var bg = new Image();
+let lives = 3;
+let WordID;
+let difficultyWordID
+let bg = new Image();
 bg.src = "client/img/stars.jpg";
-var UserID
+let UserID;
+let UserHighScore;
+// let canvas2;
+// let canvas2Context;
+
 
 
 // change this onload to a while loop in a minute good sir.
@@ -17,9 +21,9 @@ window.onload = function(){
 getUserID()
     canvas = document.getElementById('typingCanvas');
     canvasContext = canvas.getContext('2d');
-   /* canvas2=document.getElementById('backgroundIMG')
-    canvas2Context = canvas2.getContext('2d'); */
-    var typeval = document.getElementById("typingValue"); 		//user typed value.
+   // canvas2=document.getElementById('backgroundIMG')
+    // canvas2Context = canvas2.getContext('2d');
+    let typeval = document.getElementById("typingValue"); 		//user typed value.
     document.getElementById("Button2").style.display = "none";
     document.getElementById("gameOver").style.display = "none";
     document.getElementById("scoreText").style.display = "none";
@@ -43,6 +47,8 @@ getUserID()
             document.getElementById("scoreText").style.display = "block";
             document.getElementById("GameHeading").textContent = "Results below: ";
             document.getElementById("scoreText").textContent = "Your Score: " + score;
+
+            GetUserHighScore();
         }
         if(x>900 || check()){
             x=20;
@@ -52,40 +58,60 @@ getUserID()
 
 }
 
-function updateUserScore() {
-    let formData = new FormData();
+function GetUserHighScore() {
 
-    formData.append("Score", score)
-    formData.append("UserID", UserID)
-    fetch("/leaderboard/update", {method: 'post', body: formData}
+    fetch("/leaderboard/score/" + UserID, {method: 'get'}
     ).then(response => response.json()
     ).then(responseData => {
 
         if (responseData.hasOwnProperty('error')) {
             alert(responseData.error);
         } else {
-
+            UserHighScore = responseData.Score
+            UpdateLeaderboards()
 
         }
     });
+
+}
+
+function UpdateLeaderboards() {
+    let formData = new FormData();
+    formData.append("Score", score)
+    formData.append("UserID", UserID)
+
+    if (UserHighScore < score) {
+        fetch("/leaderboard/update", {method: 'post', body: formData}
+        ).then(response => response.json()
+        ).then(responseData => {
+
+            if (responseData.hasOwnProperty('error')) {
+                alert(responseData.error);
+            } else {
+                document.getElementById("HighScoreNotif").textContent = "New high score : )"
+
+            }
+        });
+    } else if (UserHighScore > score) {
+        document.getElementById("HighScoreNotif").textContent = "No New high score : ("
+    }
 }
 
 
 
 function getUserID(){
-    var sessionToken = Cookies.get("sessionToken")
-    if(check()){
+    let sessionToken = Cookies.get("sessionToken")
+
         fetch("/users/UserID/"  + sessionToken, {method: 'get'}
         ).then(response => response.json()
         ).then(responseData => {
             if (responseData.hasOwnProperty('error')) {
                 alert(responseData.error);
             } else {
-                alert(UserID);
+                UserID = responseData.UserID
 
             }
         });
-    }
 }
 
 
@@ -96,7 +122,7 @@ function drawEverything(x,string ){
     canvasContext.fillRect(0,0,canvas.width,canvas.height);
     drawString(x,string);
     scoreBoard(score);
-    highScoreBoard(highscore);
+    Lives()
 
 }
 
@@ -119,7 +145,7 @@ function Background(){
         }
     }
 }
-var background = new Background();
+let background = new Background();
 
 function animate(){
     // Start drawing here
@@ -128,7 +154,7 @@ function animate(){
     // End drawing here
     canvas2Context.restore();
 }
-var animateInterval = setInterval(animate, 30);
+let animateInterval = setInterval(animate, 30);
 */
 
 
@@ -154,7 +180,7 @@ function getWord(WordID) {
 
 
 function check(WordID){
-    var userVal = document.getElementById("val").value;
+    let userVal = document.getElementById("val").value;
     if(userVal==string){
         return true;
     }
@@ -178,11 +204,7 @@ function scoreVal(){
     }
 }
 
-function highScoreVal(){
-    if(score>highscore){
-        highscore=score;
-    }
-}
+
 
 function scoreBoard(score){
     scoreVal(WordID);
@@ -192,8 +214,8 @@ function scoreBoard(score){
     canvasContext.fillStyle = "White";
     canvasContext.fillText(score, 250, 60);
 }
-function highScoreBoard(highscore){
-    highScoreVal();
+function Lives(){
+
     canvasContext.fillStyle = "White";
     canvasContext.fillText("Lives:",750,60);
     canvasContext.fillStyle = "White";

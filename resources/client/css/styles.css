@@ -93,10 +93,12 @@ a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 
     margin-bottom: 0px;
 }
 
-#p1, #p2 , #p3, #p4, #p5, #p6{
+#p1, #p2 , #p3, #p4, #p5, #p6, .HighScoreLabel, #HighScoreNotif{
     text-align: center;
     user-select: none;
     font-size: 45px;
+    color: white;
+    font-family: hot_sauceitalic;
 }
 
 #Button1, #Button2{

@@ -12,10 +12,11 @@
         <module name="Coursework" />
         <module name="CourseWorkProperOneUseThisOne" />
         <module name="CourseWork" />
-        <module name="CourseWorkpull" />
         <module name="CourseWorkUptoDate" />
         <module name="CourseWorkAnotherpull" />
         <module name="CourseWorkAnotherPull" />
+        <module name="courseowrkpull" />
+        <module name="CourseWorkpull" />
         <module name="rhyscourseworksorry" />
       </profile>
     </annotationProcessing>

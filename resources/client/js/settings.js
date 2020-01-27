@@ -17,7 +17,7 @@ function editUser(event) {
 
     } else {
 
-        fetch('/fruit/get/' + id, {method: 'get'}
+        fetch('/fruit/get/' + UserID, {method: 'get'}
         ).then(response => response.json()
         ).then(fruit => {
 

@@ -35,6 +35,30 @@ public class leaderboardController {
         }
     }
 
+    @GET
+    @Path("score/{UserID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String ScoreUserID(@PathParam("UserID") Integer UserID){
+        System.out.println("Printing score associated with this UserID:"  + UserID);
+        JSONObject item = new JSONObject();
+        try {
+            if (UserID == null) {
+                throw new Exception("UserID is not valid.");
+            }
+            PreparedStatement ps = main.db.prepareStatement("SELECT score FROM Leaderboard WHERE UserID = ?");
+            ps.setInt(1, UserID);
+            ResultSet results = ps.executeQuery();
+
+            if (results.next()) {
+                item.put("Score", results.getInt(1));
+            }
+            return item.toString();
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to get item, please see server console for more info.\"}";
+        }
+    }
+
 
 
     @POST
@@ -67,17 +91,16 @@ public class leaderboardController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String updateLB(
-            @FormDataParam("Score") Integer Score, @FormDataParam("Placement") Integer Placement, @FormDataParam("UserID") Integer UserID) {
+            @FormDataParam("Score") Integer Score, @FormDataParam("UserID") Integer UserID) {
         try {
-            if (Score == null || Placement == null || UserID == null) {
+            if (Score == null || UserID == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
-            System.out.println("Ranking Updated placement = " + Placement);
+            System.out.println("New leaderboard Ranking");
 
-            PreparedStatement ps = main.db.prepareStatement("UPDATE Leaderboard SET Score = ?,Placement = ? WHERE UserID = ?");
+            PreparedStatement ps = main.db.prepareStatement("UPDATE Leaderboard SET Score = ? WHERE UserID = ?");
             ps.setInt(1, Score);
-            ps.setInt(2, Placement);
-            ps.setInt(3, UserID);
+            ps.setInt(2, UserID);
             ps.execute();
             return "{\"status\": \"OK\"}";
 
