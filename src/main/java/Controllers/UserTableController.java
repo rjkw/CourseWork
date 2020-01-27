@@ -69,7 +69,7 @@ public class UserTableController {
     @Path("userName/{UserID}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getUserName(@PathParam("UserID") Integer UserID){
-        System.out.println("Username Associated with this UserID - UserID:" + UserID);
+        System.out.println("Username Associated with this UserID - " + UserID);
         JSONObject item = new JSONObject();
         try {
             if (UserID == null) {
@@ -112,9 +112,6 @@ public class UserTableController {
             return "{\"error\": \"Unable to get item, please see server console for more info.\"}";
         }
     }
-
-
-
 
     @POST
     @Path("create")

@@ -68,15 +68,14 @@ public class leaderboardController {
     public String insertLB(
             @FormDataParam("Score") Integer Score, @FormDataParam("Placement") Integer Placement, @FormDataParam("UserID") Integer UserID) {
         try {
-            if (Score == null || Placement == null || UserID == null) {
+            if (Score == null || UserID == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("New ranking made placement=" + Placement);
 
-            PreparedStatement ps = main.db.prepareStatement("INSERT INTO Things (Id, Name, Quantity) VALUES (?, ?, ?)");
+            PreparedStatement ps = main.db.prepareStatement("INSERT INTO Leaderboard (Score, UserID) VALUES (?, ?)");
             ps.setInt(1, Score);
-            ps.setInt(2, Placement);
-            ps.setInt(3, UserID);
+            ps.setInt(2, UserID);
             ps.execute();
             return "{\"status\": \"OK\"}";
 

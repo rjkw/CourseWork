@@ -131,7 +131,7 @@ a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 
     margin-right: 2000px;
 }
 
-#Content{
+#Leaderboards,#Content{
     color: white;
     text-align: center;
     width: 1920px;

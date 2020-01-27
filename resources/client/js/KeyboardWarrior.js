@@ -11,19 +11,14 @@ let bg = new Image();
 bg.src = "client/img/stars.jpg";
 let UserID;
 let UserHighScore;
-// let canvas2;
-// let canvas2Context;
 
 
 
 // change this onload to a while loop in a minute good sir.
-window.onload = function(){
-getUserID()
+function pageLoad() {
+    document.getElementById("HighScoreNotif").style.display="none"
     canvas = document.getElementById('typingCanvas');
     canvasContext = canvas.getContext('2d');
-   // canvas2=document.getElementById('backgroundIMG')
-    // canvas2Context = canvas2.getContext('2d');
-    let typeval = document.getElementById("typingValue"); 		//user typed value.
     document.getElementById("Button2").style.display = "none";
     document.getElementById("gameOver").style.display = "none";
     document.getElementById("scoreText").style.display = "none";
@@ -37,8 +32,8 @@ getUserID()
 
         if (x>900) {
             lives--;
-        } else if (lives<1) {
-            canvas.style.display = "none";
+        } else if (lives==0) {
+            lives=-1; canvas.style.display = "none";fps=0;x=0;
             document.getElementById("Button2").style.display = "block";
             document.getElementById("GameTable").style.display = "none";
             document.getElementById("gameHR2").style.display = "none";
@@ -47,8 +42,7 @@ getUserID()
             document.getElementById("scoreText").style.display = "block";
             document.getElementById("GameHeading").textContent = "Results below: ";
             document.getElementById("scoreText").textContent = "Your Score: " + score;
-
-            GetUserHighScore();
+            getUserID()
         }
         if(x>900 || check()){
             x=20;
@@ -59,21 +53,47 @@ getUserID()
 }
 
 function GetUserHighScore() {
+    if (UserID === undefined|| UserID === null) {
+        document.getElementById("HighScoreNotif").style.display="block"
+        document.getElementById("HighScoreNotif").textContent = "Consider signing up to save your score!"
+    } else {
+        fetch("/leaderboard/score/" + UserID, {method: 'get'}
+        ).then(response => response.json()
+        ).then(responseData => {
+            if (responseData.hasOwnProperty('error')) {
+                alert(responseData.error);
+            } else {
+                UserHighScore = responseData.Score
 
-    fetch("/leaderboard/score/" + UserID, {method: 'get'}
-    ).then(response => response.json()
-    ).then(responseData => {
 
-        if (responseData.hasOwnProperty('error')) {
-            alert(responseData.error);
-        } else {
-            UserHighScore = responseData.Score
-            UpdateLeaderboards()
+                if (UserHighScore === null || UserHighScore === undefined) {
+                    NewLeaderBoardEntry();
+                } else {
+                    UpdateLeaderboards();
+                }
 
-        }
-    });
-
+            }
+        });
+    }
 }
+
+function NewLeaderBoardEntry() {
+    let formData = new FormData();
+    formData.append("Score", score)
+    formData.append("UserID", UserID)
+
+        fetch("/leaderboard/new", {method: 'post', body: formData}
+        ).then(response => response.json()
+        ).then(responseData => {
+            if (responseData.hasOwnProperty('error')) {
+                alert(responseData.error);
+            } else {
+
+            }
+        });
+    }
+
+
 
 function UpdateLeaderboards() {
     let formData = new FormData();
@@ -81,18 +101,20 @@ function UpdateLeaderboards() {
     formData.append("UserID", UserID)
 
     if (UserHighScore < score) {
+        console.log(UserHighScore)
         fetch("/leaderboard/update", {method: 'post', body: formData}
         ).then(response => response.json()
         ).then(responseData => {
-
+            document.getElementById("HighScoreNotif").style.display="block"
+            document.getElementById("HighScoreNotif").textContent = "New high score : )"
             if (responseData.hasOwnProperty('error')) {
                 alert(responseData.error);
             } else {
-                document.getElementById("HighScoreNotif").textContent = "New high score : )"
-
             }
         });
-    } else if (UserHighScore > score) {
+    } else{
+        console.log("we are here - leaderboard/update")
+        document.getElementById("HighScoreNotif").style.display="block"
         document.getElementById("HighScoreNotif").textContent = "No New high score : ("
     }
 }
@@ -101,7 +123,6 @@ function UpdateLeaderboards() {
 
 function getUserID(){
     let sessionToken = Cookies.get("sessionToken")
-
         fetch("/users/UserID/"  + sessionToken, {method: 'get'}
         ).then(response => response.json()
         ).then(responseData => {
@@ -109,6 +130,7 @@ function getUserID(){
                 alert(responseData.error);
             } else {
                 UserID = responseData.UserID
+                GetUserHighScore(UserID)
 
             }
         });
