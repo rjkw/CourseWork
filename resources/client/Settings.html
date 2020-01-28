@@ -4,6 +4,8 @@
 <link rel="shortcut icon" href="client/img/Icon.PNG" type="image/x-icon" />
 <head>
     <link rel="stylesheet" type="text/css" href="client/css/styles.css">
+    <script src="client/js/settings.js"></script>
+    <script src="client/js/js.cookie.js"></script>
     <title>Keyboard Warrior Settings</title>
     <style> body{ overflow:hidden; margin:0px; } </style>
 
@@ -12,41 +14,43 @@
 
 <h1 id="sh1"> Keyboard Warrior Settings </h1>
 <hr>
-<body>
+<body onload="pageLoad()">
 
-
-
-<div id="editDiv">
     <h2 id="editHeading"></h2>
     <form id="UserForm">
         <input type="hidden" name="id" id="UserID">
         <div>
             <label for="firstName" class="label">Firstname:</label>
-            <input type="text" name="name" id="firstName">
+            <input type="text" name="firstName" id="firstName">
         </div>
         <div>
             <label for="lastName" class="label">Lastname:</label>
-            <input type="text" name="image" id="lastName">
+            <input type="text" name="lastName" id="lastName">
         </div>
         <div>
             <label for="userName" class="label">Username:</label>
-            <input type="text" name="colour" id="userName">
+            <input type="text" name="userName" id="userName">
         </div>
         <div>
             <label for="Email" class="label">Email:</label>
-            <input type="text" name="size" id="Email">
+            <input type="text" name="Email" id="Email">
         </div>
         <div>
             <label for="Password" class="label">Password:</label>
-            <input type="text" name="size" id="Password">
+            <input type="text" name="Password" id="Password">
+        </div>
+        <div>
+            <label for="UserID" id="UserIDs" class="label" name="UserID"></label>
+
+
         </div>
 
         <div>
+            <hr>
+            <p id="Button2"> <a class="Save" onclick="saveEditUser()">Save</a></p>
             <p id="Button1"> <a class="MainMenuButton" href="index.html">Main Menu</a></p>
-            <input type="submit" value="Save" id="saveButton">
-            <input type="submit" value="Cancel" id="cancelButton">
         </div>
     </form>
-</div>
+
 </body>
 </html>

@@ -31,6 +31,8 @@ h1 {
     user-select: none;
 }
 
+
+
 #sh1 {
     text-align:center ;
     color: WHITE;
@@ -71,15 +73,17 @@ a.Admin:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;
 a.Logout:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Database:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
+a.Save:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 
 
 
-.Start, .Leaderboards, .Settings, .Login , .Admin, .Logout, .MainMenuButton{
+.Start, .Leaderboards, .Settings, .Login , .Admin, .Logout, .MainMenuButton, .Save{
     text-decoration: none;
     color: white;
     text-align: center;
     font-family: "hot_sauceitalic";
     cursor: pointer;
+    align-content: center;
 }
 
 #gameOver, .gameOverLabel, #scoreText, .scoreLabel, #scoreValue{
@@ -106,6 +110,7 @@ a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 
     user-select: none;
     font-size:  40px;
     margin-top: 0px;
+    margin-bottom: 0px;
 
 }
 .Database{
@@ -119,7 +124,7 @@ a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 
     user-select: none;
 }
 
-#MainMenuButton {
+#MainMenuButton,.Save, .MainMenuButton{
     text-decoration: none;
     color: white;
     text-align: center;
@@ -127,8 +132,9 @@ a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 
     cursor: pointer;
     font-size: 60px;
     user-select: none;
-    margin-bottom: 500px;
-    margin-right: 2000px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+
 }
 
 #Leaderboards,#Content{
@@ -285,5 +291,17 @@ hr{
     color: white;
     font-family: hot_sauceitalic;
     font-size: 50px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
 
+#UserForm {
+    user-select: none;
+    align-content: center;
+    text-align: center;
+    color: white;
+    font-family: hot_sauceitalic;
+    font-size: 50px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }

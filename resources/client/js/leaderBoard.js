@@ -1,7 +1,7 @@
 let userName;
 let UserID;
     function pageLoad() {
-       /* document.getElementById("Content").style.display="none";
+        document.getElementById("Content").style.display="none";
         let leaderboardHTML = `<table align="center">` +
             '<tr>' +
             '<th style="font-family: hot_sauceitalic", font>Placement</th>' +
@@ -64,7 +64,7 @@ function LeaderBoards() {
         document.getElementById("Leaderboards").innerHTML = leaderboardHTML;
     });
 
-        */
+
 }
 
 

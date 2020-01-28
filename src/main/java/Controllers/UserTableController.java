@@ -44,6 +44,48 @@ public class UserTableController {
         }
     }
 
+    @POST
+    @Path("update")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String updateUser(
+            @FormDataParam("UserID") Integer UserID,
+            @FormDataParam("firstName") String firstName,
+            @FormDataParam("lastName") String lastName,
+            @FormDataParam("userName") String userName,
+            @FormDataParam("Email") String Email,
+            @FormDataParam("Password") String Password) {
+        try {
+            if (UserID == null || firstName == null || lastName == null || userName == null || Email == null || Password == null) {
+                throw new Exception("One or more form data parameters are missing in the HTTP request.");
+
+            }
+            System.out.println("User Updated at UserID: " + UserID);
+
+            PreparedStatement ps = main.db.prepareStatement("UPDATE UserTable SET firstName = ?,lastName = ?,userName = ?,Email = ?, Password = ?  WHERE UserID = ?");
+
+            ps.setString(1, firstName);
+
+            ps.setString(2, lastName);
+
+            ps.setString(3, userName);
+
+            ps.setString(4, Email);
+
+            ps.setString(5, Password);
+
+            ps.setInt(6, UserID);
+
+
+            ps.execute();
+            return "{\"status\": \"OK\"}";
+
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to update item, please see server console for more info.\"}";
+        }
+    }
+
     @GET
     @Path("emails")
     @Produces(MediaType.APPLICATION_JSON)
@@ -90,6 +132,36 @@ public class UserTableController {
     }
 
     @GET
+    @Path("User/{UserID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String GetUser(@PathParam("UserID") Integer UserID){
+        System.out.println("User Associated with this UserID - " + UserID);
+        JSONObject item = new JSONObject();
+        try {
+            if (UserID == null) {
+                throw new Exception("UserID does not match any existing UserID");
+            }
+            PreparedStatement ps = main.db.prepareStatement("SELECT firstName,lastName,userName,Email,Password FROM UserTable WHERE UserID = ?");
+            ps.setInt(1, UserID);
+            ResultSet results = ps.executeQuery();
+
+            if (results.next()) {
+                item.put("firstName", results.getString(1));
+                item.put("lastName", results.getString(2));
+                item.put("userName", results.getString(3));
+                item.put("Email", results.getString(4));
+                item.put("Password", results.getString(5));
+
+            }
+            return item.toString();
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to get item, please see server console for more info.\"}";
+        }
+    }
+
+
+    @GET
     @Path("UserID/{sessionToken}")
     @Produces(MediaType.APPLICATION_JSON)
     public String sessionTokenUserID(@PathParam("sessionToken") String sessionToken){
@@ -118,7 +190,11 @@ public class UserTableController {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String insertGi(
-            @FormDataParam("firstName") String firstName, @FormDataParam("lastName") String lastName, @FormDataParam("userName") String userName, @FormDataParam("Email") String Email, @FormDataParam("Password") String Password) {
+            @FormDataParam("firstName") String firstName,
+            @FormDataParam("lastName") String lastName,
+            @FormDataParam("userName") String userName,
+            @FormDataParam("Email") String Email,
+            @FormDataParam("Password") String Password) {
         try {
             if (firstName == null || lastName == null || Email == null || Password == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
