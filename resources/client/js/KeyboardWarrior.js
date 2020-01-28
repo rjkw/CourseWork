@@ -181,7 +181,7 @@ let animateInterval = setInterval(animate, 30);
 
 
 function getWord(WordID) {
-    WordID = Math.floor(Math.random()*30) +1
+    WordID = Math.floor(Math.random()*1000) +1
     difficultyWordID = WordID
 
     if (WordID === null) {

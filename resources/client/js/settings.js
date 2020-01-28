@@ -7,7 +7,7 @@ function pageLoad() {
                 alert(responseData.error);
             } else {
                 UserID = responseData.UserID;
-                document.getElementById("UserIDs").innerText="User ID: 🤡";
+                document.getElementById("UserIDs").innerText="User ID: N/A";
                 editUser(UserID);
 
             }

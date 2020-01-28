@@ -13,9 +13,9 @@
 
 <h1 id="loh1"> Keyboard Warrior Login </h1>
 <h2 id="loh2"> Please Login to Continue</h2>
+<hr>
 <body onload="pageLoad()">
-<div id="content">
-    <hr />
+<div id="Login">
     <form id="loginForm">
         <div class="loginDiv">
             <label for="username" class="label1" style="margin-right: 8px">Username: </label>
@@ -27,7 +27,41 @@
         </div>
         <div class="loginDiv">
             <p id="loginButton"><a class="Admin" Value="Login" >Login</a></p>
+            <p id="SignupButton"><a class="Admin" onclick="Signup()">Signup</a></p>
             <p id="Button1"> <a class="MainMenuButton" href="index.html">Main Menu</a></p>
+
+
+
+        </div>
+    </form>
+</div>
+
+<div id="Signup">
+    <form id="SignupForm">
+        <div class="FirstNameDiv">
+            <label for="firstName" class="label1" style="margin-right: 8px">Firstname: </label>
+            <input type="text" name="firstName" id="firstName">
+        </div>
+        <div class="LastNameDiv">
+            <label for="lastName" class="label1">Lastname: </label>
+            <input type="text" name="lastName" id="lastName">
+        </div>
+        <div class="UserNameDiv">
+            <label for="userName" class="label1">Username: </label>
+            <input type="text" name="userName" id="userName">
+        </div>
+        <div class="EmailDiv">
+            <label for="Email" class="label1">Email: </label>
+            <input type="text" name="Email" id="Email">
+        </div>
+        <div class="PasswordDiv">
+            <label for="Password" class="label1">Password: </label>
+            <input type="password" name="Password" id="Password">
+        </div>
+        <div class="loginDiv">
+            <p id="SignupButton"><a class="Admin" onclick="NewAccount()">Signup</a></p>
+            <p id="Button1"> <a class="MainMenuButton" href="index.html">Main Menu</a></p>
+
 
 
         </div>

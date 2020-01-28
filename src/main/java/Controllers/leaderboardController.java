@@ -35,6 +35,31 @@ public class leaderboardController {
         }
     }
 
+
+    @GET
+    @Path("userNameList")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String UsernameLeaderBoards() {
+        System.out.println("Listing score,username and Position");
+        JSONArray list = new JSONArray();
+        try {
+            PreparedStatement ps = main.db.prepareStatement("SELECT Leaderboard.Score, Leaderboard.Placement, UserTable.userName FROM Leaderboard INNER JOIN UserTable ON Leaderboard.UserID = UserTable.UserID");
+            ResultSet results = ps.executeQuery();
+            while (results.next()) {
+                JSONObject item = new JSONObject();
+                item.put("Score", results.getInt(1));
+                item.put("Placement", results.getInt(2));
+                item.put("userName", results.getString(3));
+                list.add(item);
+            }
+            return list.toString();
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to list items, please see server console for more info.\"}";
+        }
+    }
+
+
     @GET
     @Path("score/{UserID}")
     @Produces(MediaType.APPLICATION_JSON)

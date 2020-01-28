@@ -69,7 +69,7 @@ a.Start:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;
 a.Leaderboards:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Settings:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Login:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
-a.Admin:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
+a.Admin:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 a.Logout:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Database:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
@@ -77,7 +77,7 @@ a.Save:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 
 
 
-.Start, .Leaderboards, .Settings, .Login , .Admin, .Logout, .MainMenuButton, .Save{
+.Start, .Leaderboards, .Settings, .Login , .Admin, .Logout, .MainMenuButton, .Save, .SignupDiv{
     text-decoration: none;
     color: white;
     text-align: center;
@@ -97,7 +97,7 @@ a.Save:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
     margin-bottom: 0px;
 }
 
-#p1, #p2 , #p3, #p4, #p5, #p6, .HighScoreLabel, #HighScoreNotif{
+#p1, #p2 , #p3, #p4, #p5, #p6, #p7, .HighScoreLabel, #HighScoreNotif{
     text-align: center;
     user-select: none;
     font-size: 45px;
@@ -110,21 +110,21 @@ a.Save:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
     user-select: none;
     font-size:  40px;
     margin-top: 0px;
-    margin-bottom: 0px;
+    margin-bottom:0px;
+    margin-left: -10px;
 
 }
-.Database{
+#Content{
     text-decoration: none;
     color: white;
     text-align: center;
     font-family: "hot_sauceitalic";
-    cursor: pointer;
-    margin-left: 50px;
+    margin-left: 40px;
     font-size: 60px;
     user-select: none;
 }
 
-#MainMenuButton,.Save, .MainMenuButton{
+#MainMenuButton,.Save, .MainMenuButton, .Database{
     text-decoration: none;
     color: white;
     text-align: center;
@@ -134,6 +134,7 @@ a.Save:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
     user-select: none;
     margin-bottom: 0px;
     margin-top: 0px;
+    margin-left: 40px;
 
 }
 
@@ -149,26 +150,29 @@ a.Save:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 
 table, th{
     border: 1px solid black;
-    padding: 5px;
+    padding: 10px;
     text-align: left;
     background-color: black;
     empty-cells: show;
-    font-size: 25px;
+    font-size: 35px;
     font-family: "Verdana";
     position: sticky;
     top: 0;
+    font-family: hot_sauceitalic;
 }
 
 td {
     border: 1px solid black;
     border-collapse: collapse;
-    padding: 5px;
+    padding: 10px;
     text-align: left;
     background-color: black;
     empty-cells: show;
     font-size: 20px;
-    font-family: "Verdana";
+    font-family: "hot_sauceitalic";
     overflow: auto;
+    color: mediumpurple;
+
 
 }
 
@@ -182,9 +186,7 @@ td {
 }
 
 .loginDiv {
-    font-size: 40px;
-    margin-top: 40px;
-    margin-left: 20px;
+    font-size: 50px;
     align-content: center;
     text-align: center;
 }
@@ -197,11 +199,14 @@ td {
     outline: #000000 none;
 }
 
-#loginButton, #LogOutButton {
+#loginButton, #LogOutButton, #SignupButton {
     width: 200px;
     text-align: center;
     user-select: none;
-    margin: auto;
+    margin-left: 870px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+
 
 }
 
@@ -304,4 +309,21 @@ hr{
     font-size: 50px;
     margin-top: 0px;
     margin-bottom: 0px;
+}
+
+.FirstNameDiv {
+    margin-left: 800px;
+}
+.LastNameDiv{
+    margin-left: 822px;
+}
+.UserNameDiv{
+    margin-left: 823px;
+}
+.EmailDiv{
+    margin-left: 862px;
+}
+.PasswordDiv{
+    margin-left: 815px;
+    font-size: 14pt;
 }

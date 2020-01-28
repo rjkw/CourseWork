@@ -1,24 +1,40 @@
-    let adminstatus = Boolean(false);
+let adminstatus = Boolean(false);
+let username;
+let token
 
 function pageLoad() {
-
-
     document.getElementById("p5").style.display = "none";
+    document.getElementById("p5").style.display = "none";
+    document.getElementById("p7").style.display = "none";
+
+   token = Cookies.get("sessionToken")
+    fetch("/users/UserName/" + token, {method: 'get'}
+    ).then(response => response.json()
+    ).then(responseData => {
+        if (responseData.hasOwnProperty('error')) {
+            alert(responseData.error);
+        } else {
+            username = (responseData.userName)
+            if (username === undefined) {
+                document.getElementById("p7").style.display = "none";
+            } else {
+                document.getElementById("p7").innerText = "Logged in as: " + username;
+                document.getElementById("p7").style.display = "block";
+            }
+        }
+    });
+
+
+
+
+
 const sessionToken =Cookies.get("sessionToken")
-
-
     if (sessionToken === undefined ) {
         showLoginLogOut("logged out");
-
     } else {
         showLoginLogOut("logged in");
         checkadmin()
     }
-
-
-
-
-
 }
 
 function showLoginLogOut(option) {

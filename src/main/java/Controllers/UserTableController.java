@@ -63,19 +63,12 @@ public class UserTableController {
             System.out.println("User Updated at UserID: " + UserID);
 
             PreparedStatement ps = main.db.prepareStatement("UPDATE UserTable SET firstName = ?,lastName = ?,userName = ?,Email = ?, Password = ?  WHERE UserID = ?");
-
             ps.setString(1, firstName);
-
             ps.setString(2, lastName);
-
             ps.setString(3, userName);
-
             ps.setString(4, Email);
-
             ps.setString(5, Password);
-
             ps.setInt(6, UserID);
-
 
             ps.execute();
             return "{\"status\": \"OK\"}";
@@ -165,7 +158,7 @@ public class UserTableController {
     @Path("UserID/{sessionToken}")
     @Produces(MediaType.APPLICATION_JSON)
     public String sessionTokenUserID(@PathParam("sessionToken") String sessionToken){
-        System.out.println("See console - Username Associated with this sessionToken: " + sessionToken);
+        System.out.println("See console - UserID Associated with this sessionToken: " + sessionToken);
         JSONObject item = new JSONObject();
         try {
             if (sessionToken == null) {
@@ -185,6 +178,30 @@ public class UserTableController {
         }
     }
 
+    @GET
+    @Path("UserName/{sessionToken}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String sessionTokenUserName(@PathParam("sessionToken") String sessionToken){
+        System.out.println("See console - Username Associated with this sessionToken: " + sessionToken);
+        JSONObject item = new JSONObject();
+        try {
+            if (sessionToken == null) {
+                throw new Exception("Session Token is not valid.");
+            }
+            PreparedStatement ps = main.db.prepareStatement("SELECT userName FROM UserTable WHERE SessionToken = ?");
+            ps.setString(1, sessionToken);
+            ResultSet results = ps.executeQuery();
+
+            if (results.next()) {
+                item.put("userName", results.getString(1));
+            }
+            return item.toString();
+        } catch (Exception exception) {
+            System.out.println("Database error: " + exception.getMessage());
+            return "{\"error\": \"Unable to get item, please see server console for more info.\"}";
+        }
+    }
+
     @POST
     @Path("create")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
@@ -196,7 +213,11 @@ public class UserTableController {
             @FormDataParam("Email") String Email,
             @FormDataParam("Password") String Password) {
         try {
-            if (firstName == null || lastName == null || Email == null || Password == null) {
+            if (firstName == null || lastName == null || Email == null || Password == null || userName == null) {
+                System.out.println(firstName);
+                System.out.println(lastName);
+                System.out.println(Email);
+                System.out.println(Password);
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
             }
             System.out.println("New user added " + userName);
