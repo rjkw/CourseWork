@@ -300,19 +300,34 @@ hr{
     margin-bottom: 0px;
 }
 
-#UserForm {
+#UserForm, #input,.label {
     user-select: none;
-    align-content: center;
-    text-align: center;
     color: white;
     font-family: hot_sauceitalic;
     font-size: 50px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+}
+.FirstNameDiv2 {
+    margin-left: 777px;
+}
+.LastNameDiv2{
+    margin-left: 800px;
+}
+.UserNameDiv2{
+    margin-left: 802px;
+}
+.EmailDiv2{
+    margin-left: 868px;
+}
+.PasswordDiv2{
+    margin-left: 790px;
+}
+#UserIDs{
+    margin-left: 839px;
 }
 
-.FirstNameDiv {
-    margin-left: 800px;
+.FirstNameDiv{
+    margin-left: 80px;
+
 }
 .LastNameDiv{
     margin-left: 822px;
@@ -327,7 +342,8 @@ hr{
     margin-left: 815px;
     font-size: 14pt;
 }
-#WordDatabaseDiv,#UserIDDiv{
+
+#UserDatabaseDiv,#UserIDDiv{
     margin-top: 200px;
     text-align:center ;
     align-content: center;
@@ -335,17 +351,12 @@ hr{
     font-family: "hot_sauceitalic";
     font-size:30px;
     margin-top: 200px;
-    margin-bottom: 0px;
     user-select: none;
     position: absolute;
 }
 
 #ManagementButtonsDiv{
     user-select: none;
-}
-
-.FirstNameDiv2{
-    margin-right: 1500px;
 }
 
 .LastNameDiv2 {
