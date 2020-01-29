@@ -6,19 +6,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CourseWorktemo" />
-        <module name="CourseWorkcomputing2pull" />
-        <module name="Courseworkfpusdfldskljfghslk" />
         <module name="CourseWorkTemo" />
-        <module name="Coursework" />
-        <module name="CourseWorkProperOneUseThisOne" />
-        <module name="CourseWork" />
         <module name="CourseWorkUptoDate" />
-        <module name="CourseWorkAnotherpull" />
-        <module name="CourseWorkAnotherPull" />
         <module name="courseowrkpull" />
+        <module name="Courseworkfpusdfldskljfghslk" />
+        <module name="CourseWorkAnotherPull" />
+        <module name="CourseWorkProperOneUseThisOne" />
+        <module name="Coursework" />
+        <module name="CourseWorkAnotherpull" />
+        <module name="CourseWorkAnotherone" />
+        <module name="CourseWork" />
+        <module name="CourseWorktemo" />
         <module name="CourseWorkpull" />
         <module name="rhyscourseworksorry" />
+        <module name="CourseWorkcomputing2pull" />
       </profile>
     </annotationProcessing>
   </component>

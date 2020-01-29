@@ -3,6 +3,7 @@ function pageLoad() {
     checkadmin()
     document.getElementById("UserDatabaseDiv").style.display="none";
 document.getElementById("UserIDDiv").style.display="none";
+    document.getElementById("DeleteCreateUserDIV").style.display="none";
 }
 
 
@@ -35,6 +36,8 @@ function WordTableCreate() {
 function UserTableCreate() {
     document.getElementById("UserDatabaseDiv").style.display="none";
     document.getElementById("UserIDDiv").style.display="block";
+
+
     let UsersHTML = `<table align="center">` +
 
         '<tr>' +
@@ -100,10 +103,11 @@ function editUser() {
             console.log(document.getElementById("firstName").value)
 
         } else {
-
+            document.getElementById("DeleteCreateUserDIV").style.display="block";
             console.log(document.getElementById("firstName").value)
             document.getElementById("UserDatabaseDiv").style.display = "Block";
             document.getElementById("UserIDDiv").style.display = "none";
+
             fetch('/users/User/' + UserID, {method: 'get'}
             ).then(response => response.json()
             ).then(User => {
@@ -123,6 +127,7 @@ function editUser() {
 
         }
     }
+}
 
     function saveEditUser() { // This function is used to save the data if any data has been adjusted, it is called when the save button is clicked on the page.
         event.preventDefault();
@@ -173,4 +178,24 @@ function editUser() {
             }
         });
     }
+
+function DeleteUser() {
+    const UserID = document.getElementById("UserID").value;
+    const form = document.getElementById("UserForm");
+    const formData = new FormData(form);
+    formData.append("UserID", UserID);
+    console.log(UserID)
+
+// Next we declare the formData as this is how the API will be taking in data, inside of this form is all the input boxes from earlier now populated with data. We also append the form data as the API requires the UserID which is automatically being set as a variable we can simply pass it.
+    fetch('/users/delete', {method: 'post', body: formData}
+    ).then(response => response.json()
+    ).then(responseData => {
+
+        if (responseData.hasOwnProperty('error')) {
+            alert(responseData.error);// Error catching
+        } else {
+            console.log("User deleted")
+            // If the API runs with no issues the data inside of the input boxes will be put into the database and they user will be redirected to the index.html
+        }
+    });
 }

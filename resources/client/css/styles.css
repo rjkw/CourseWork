@@ -74,10 +74,10 @@ a.Logout:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red
 a.Database:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 a.Save:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
+a.SubmitButtonClass:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
+a.DeleteUser:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 
-
-
-.Start, .Leaderboards, .Settings, .Login , .Admin, .Logout, .MainMenuButton, .Save, .SignupDiv{
+.Start, .Leaderboards, .Settings, .Login , .Admin, .Logout, .MainMenuButton, .Save, .SignupDiv, .SubmitButtonClass,#SubmitButton{
     text-decoration: none;
     color: white;
     text-align: center;
@@ -343,7 +343,7 @@ hr{
     font-size: 14pt;
 }
 
-#UserDatabaseDiv,#UserIDDiv{
+#UserDatabaseDiv,#UserIDDiv {
     margin-top: 200px;
     text-align:center ;
     align-content: center;
@@ -351,6 +351,18 @@ hr{
     font-family: "hot_sauceitalic";
     font-size:30px;
     margin-top: 200px;
+    user-select: none;
+    position: absolute;
+}
+
+#DeleteCreateUserDIV {
+    margin-top: 200px;
+    text-align:center ;
+    align-content: center;
+    color: WHITE;
+    font-family: "hot_sauceitalic";
+    font-size:30px;
+    margin-left: 1700px;
     user-select: none;
     position: absolute;
 }

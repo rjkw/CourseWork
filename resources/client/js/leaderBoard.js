@@ -28,10 +28,7 @@ function pageLoad() {
 // This ends the table tag to ensure that it is fully closed.
             document.getElementById("Content").innerHTML = leaderboardHTML;
 // Finally this inputs the actual table (identified as leaderboardHTML) into my “Content” div in my page so that it actually prints.
-
         });
-
-
     }
 
 
