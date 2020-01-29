@@ -12,9 +12,40 @@
 <h1 id="Ah1"> Admin Area </h1>
 <hr>
 <body onload="pageLoad()">
+<div id="ManagementButtonsDiv">
 <a class="MainMenuButton" href="index.html" style="font-size: 60px">Main Menu</a>
 <a id="WordsDatabaseButton" class="Database" onclick="WordTableCreate()">Words</a>
 <a id="UserDatabaseButton" class="Database" onclick="UserTableCreate()">User</a>
+</div>
+<div id="UserIDDiv">
+<label for="UserID" class="label">UserID:</label>
+<input type="text" name="UserID" id="UserID">
+    <p id="SubmitButton" onclick="editUser()"> Submit</p>
+</div>
+<div id="UserDatabaseDiv" >
+    <p>
+    <form id="UserForm">
+        <div>
+            <label for="firstName" class="label">Firstname:</label>
+            <input type="text" name="firstName" id="firstName">
+        </div>
+        <div>
+            <label for="lastName" class="label">Lastname:</label>
+            <input type="text" name="lastName" id="lastName">
+        </div>
+        <div>
+            <label for="userName" class="label">Username:</label>
+            <input type="text" name="userName" id="userName">
+        </div>
+        <div>
+            <label for="Email" class="label">Email:</label>
+            <input type="text" name="Email" id="Email">
+        </div>
+        <div>
+            <label for="Password" class="label">Password:</label>
+            <input type="text" name="Password" id="Password">
+        </div>
+ </div>
 <div id="Content" ></div>
 
 </body>

@@ -1,10 +1,13 @@
 function pageLoad() {
     checkadmin()
-
+    document.getElementById("UserDatabaseDiv").style.display="none";
+document.getElementById("UserIDDiv").style.display="none";
 }
 
 
 function WordTableCreate() {
+    document.getElementById("UserDatabaseDiv").style.display="none";
+    document.getElementById("UserIDDiv").style.display="none";
     let WordsHTML = `<table align="center">` +
         '<tr>' +
         '<th style="position: sticky">WordID</th>' +
@@ -29,6 +32,8 @@ function WordTableCreate() {
 }
 
 function UserTableCreate() {
+    document.getElementById("UserDatabaseDiv").style.display="none";
+    document.getElementById("UserIDDiv").style.display="block";
     let UsersHTML = `<table align="center">` +
 
         '<tr>' +
@@ -75,3 +80,40 @@ function checkadmin() {
         }
     });
 }
+
+function editUser() {
+    let UserID = document.getElementById("UserID").value;
+
+    if (UserID === null || UserID === "0" || UserID === "") {
+        alert("Please enter a valid UserID! See table ->")
+    } else {
+        if (UserID === null ) {
+            document.getElementById("firstName").value = '';
+            document.getElementById("lastName").value = '';
+            document.getElementById("userName").value = '';
+            document.getElementById("Email").value = '';
+            document.getElementById("Password").value = '';
+
+        } else
+            document.getElementById("UserDatabaseDiv").style.display = "Block";
+            document.getElementById("UserIDDiv").style.display = "none";
+             fetch('/users/User/' + UserID, {method: 'get'}
+              ).then(response => response.json()
+              ).then(User => {
+
+            if (User.hasOwnProperty('error')) {
+                alert(User.error);
+            } else {
+                document.getElementById("firstName").value = User.firstName;
+                document.getElementById("lastName").value = User.lastName;
+                document.getElementById("userName").value = User.userName;
+                document.getElementById("Email").value = User.Email;
+                document.getElementById("Password").value = User.Password;
+
+            }
+
+        });
+
+    }
+}
+
