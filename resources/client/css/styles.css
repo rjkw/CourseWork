@@ -68,7 +68,7 @@ body {
 a.Start:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Leaderboards:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Settings:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
-a.Login:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
+a.Login:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Admin:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 a.Logout:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;font-size: 150%;}
 a.Database:hover, a.Start:active {text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
