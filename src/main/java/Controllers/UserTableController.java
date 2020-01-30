@@ -363,19 +363,15 @@ public class UserTableController {
     @Path("makeadmin")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String makeAdmin(@FormDataParam("targetuser") String UserID, @CookieParam("sessiontoken") String SessionToken) {
+    public String makeAdmin(@FormDataParam("targetuser") Integer UserID) {
         try {
-            if (UserID == null || SessionToken == null) {
+            if (UserID == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
-            }
-            String userType = validateAdmin(SessionToken);
-            if (userType.equals("User")) {
-                throw new Exception("This option is only available to admins. If this is an error, contact the server admin.");
             }
             System.out.println("User has been made an admin at userID: " + UserID);
             PreparedStatement ps = main.db.prepareStatement("UPDATE UserTable SET userType=? WHERE UserID=?");
             ps.setString(1, "Admin");
-            ps.setString(2, UserID);
+            ps.setInt(2, UserID);
             ps.executeUpdate();
             return "{\"User - MadeAdmin, User:\": \"" + UserID + "\"}";
         } catch (Exception e) {
@@ -388,19 +384,15 @@ public class UserTableController {
     @Path("makeuser")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public String makeUser(@FormDataParam("targetuser") String UserID, @CookieParam("sessiontoken") String SessionToken) {
+    public String makeUser(@FormDataParam("targetuser") Integer UserID) {
         try {
-            if (UserID == null || SessionToken == null) {
+            if (UserID == null) {
                 throw new Exception("One or more form data parameters are missing in the HTTP request.");
-            }
-            String userType = validateAdmin(SessionToken);
-            if (userType.equals("User")) {
-                throw new Exception("This option is only available to admins. If this is an error, contact the server admin.");
             }
             System.out.println("/user/makeuser");
             PreparedStatement ps = main.db.prepareStatement("UPDATE UserTable SET userType=? WHERE UserID=?");
             ps.setString(1, "User");
-            ps.setString(2, UserID);
+            ps.setInt(2, UserID);
             ps.executeUpdate();
             return "{\"User - MadeUser, UserID:\": \"" + UserID + "\"}";
         } catch (Exception e) {

@@ -76,6 +76,10 @@ a.MainMenuButton:hover, a.Start:active{text-shadow: -2px -2px 5px cyan, 2px 2px 
 a.Save:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 a.SubmitButtonClass:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 a.DeleteUser:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
+a.MakeAdminButton:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
+a.MakeUserButton:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
+a.DeleteUserButton:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
+a.EditUserButton:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px red;}
 
 .Start, .Leaderboards, .Settings, .Login , .Admin, .Logout, .MainMenuButton, .Save, .SignupDiv, .SubmitButtonClass,#SubmitButton{
     text-decoration: none;
@@ -84,6 +88,12 @@ a.DeleteUser:hover, a.Save:active{text-shadow: -2px -2px 5px cyan, 2px 2px 5px r
     font-family: "hot_sauceitalic";
     cursor: pointer;
     align-content: center;
+}
+
+.MakeAdminButton,.MakeUserButton, .DeleteUserButton, .EditUserButton{
+    color: white;
+    user-select: none;
+    cursor: pointer;
 }
 
 #gameOver, .gameOverLabel, #scoreText, .scoreLabel, #scoreValue{

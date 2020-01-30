@@ -17,15 +17,9 @@
 <a id="WordsDatabaseButton" class="Database" onclick="WordTableCreate()">Words</a>
 <a id="UserDatabaseButton" class="Database" onclick="UserTableCreate()">User</a>
 </div>
-<div id="UserIDDiv">
-    <p for="UserID">Enter UserID of the</p>
-    <p for="UserID">User you want to edit</p>
-<label for="UserID" class="label">UserID:</label>
-<input type="text" name="UserID" id="UserID">
-    <p id="SubmitButton"><a class ="SubmitButtonClass" onclick="editUser()"> Submit</a></p>
-</div>
+
 <div id="UserDatabaseDiv" >
-    <p>
+
     <form id="UserForm">
         <div>
             <label for="firstName" class="label">Firstname:</label>
@@ -49,11 +43,9 @@
         </div>
     <div>
     <p id="Button2"> <a class="Save" onclick="saveEditUser()">Save</a></p>
+    <p id="Button3"> <a class="Save" onclick="Back()" style="font-size: 30px">Back</a></p>
     </div>
  </div>
-<div id="DeleteCreateUserDIV">
-    <div class="DeleteUser" onclick="DeleteUser()"> Delete User</div>
-</div>
 <div id="Content" ></div>
 
 </body>
