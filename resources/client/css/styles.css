@@ -336,7 +336,7 @@ hr{
 }
 
 .FirstNameDiv{
-    margin-left: 80px;
+    margin-left: 806px;
 
 }
 .LastNameDiv{
@@ -354,15 +354,12 @@ hr{
 }
 
 #UserDatabaseDiv,#UserIDDiv {
-    margin-top: 200px;
-    text-align:center ;
-    align-content: center;
+    margin-top: 100px;
     color: WHITE;
     font-family: "hot_sauceitalic";
     font-size:30px;
-    margin-top: 200px;
     user-select: none;
-    position: absolute;
+
 }
 
 #DeleteCreateUserDIV {
@@ -383,5 +380,24 @@ hr{
 
 .LastNameDiv2 {
     margin-right: 100px;
+}
+
+#ManagementFN{
+    margin-left: 782px;
+}
+#ManagementLN{
+    margin-left: 807px;
+}
+#ManagementUN{
+    margin-left: 811px;
+}
+#ManagementE{
+    margin-left: 878px;
+}
+#ManagementP{
+    margin-left: 800px;
+}
+#Button3 {
+    margin-left: 890px;
 }
 

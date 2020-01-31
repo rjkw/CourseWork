@@ -220,7 +220,7 @@ function scoreVal(){ // Function to get the difficulty of the word.
 
 
 
-function scoreBoard(score){ // This function draws my Scoreboard in the topleft of canvas.
+ function scoreBoard(score){ // This function draws my Scoreboard in the topleft of canvas.
     scoreVal(WordID); // Calls the scoreVal API and passes the WordID
     canvasContext.fillStyle = "White"; // Fill style
     canvasContext.font = "40px hot_sauceitalic"; // Font and size
